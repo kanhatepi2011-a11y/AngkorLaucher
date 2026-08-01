@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="@dimen/_3sdp" android:left="@dimen/_1sdp">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/launcher_panel_radius" />
+            <solid android:color="@color/glass_shadow" />
+        </shape>
+    </item>
+    <item android:bottom="@dimen/_3sdp" android:right="@dimen/_1sdp">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/launcher_panel_radius" />
+            <solid android:color="@color/launcher_glass_fill" />
+            <stroke android:width="@dimen/_1sdp" android:color="@color/launcher_glass_border" />
+        </shape>
+    </item>
+    <item android:height="@dimen/_1sdp" android:gravity="top" android:left="@dimen/_12sdp" android:right="@dimen/_12sdp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_highlight" />
+        </shape>
+    </item>
+</layer-list>

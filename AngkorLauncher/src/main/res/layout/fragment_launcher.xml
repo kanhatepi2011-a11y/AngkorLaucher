@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_menu_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- The transparent space to the left holds contextual Khmer labels; only the rail is darkened. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/launcher_menu"
+        android:layout_width="@dimen/_190sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/launcher_safe_edge"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/utility_rail"
+            android:layout_width="@dimen/launcher_utility_width"
+            android:layout_height="0dp"
+            android:background="@drawable/launcher_utility_panel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/about_button"
+            android:layout_width="@dimen/launcher_utility_target"
+            android:layout_height="@dimen/launcher_utility_target"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="@drawable/launcher_utility_item"
+            android:clickable="true"
+            android:contentDescription="@string/launcher_about_description"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="@id/utility_rail"
+            app:layout_constraintStart_toStartOf="@id/utility_rail"
+            app:layout_constraintTop_toTopOf="@id/utility_rail"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:id="@+id/about_icon"
+                android:layout_width="@dimen/launcher_utility_icon"
+                android:layout_height="@dimen/launcher_utility_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_about"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/custom_control_button"
+            android:layout_width="@dimen/launcher_utility_target"
+            android:layout_height="@dimen/launcher_utility_target"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/launcher_utility_item"
+            android:clickable="true"
+            android:contentDescription="@string/custom_control_title"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="@id/utility_rail"
+            app:layout_constraintStart_toStartOf="@id/utility_rail"
+            app:layout_constraintTop_toBottomOf="@id/about_button"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:layout_width="@dimen/launcher_utility_icon"
+                android:layout_height="@dimen/launcher_utility_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_menu_custom_controls"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/open_main_dir_button"
+            android:layout_width="@dimen/launcher_utility_target"
+            android:layout_height="@dimen/launcher_utility_target"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/launcher_utility_item"
+            android:clickable="true"
+            android:contentDescription="@string/main_open_main_dir"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="@id/utility_rail"
+            app:layout_constraintStart_toStartOf="@id/utility_rail"
+            app:layout_constraintTop_toBottomOf="@id/custom_control_button"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:layout_width="@dimen/launcher_utility_icon"
+                android:layout_height="@dimen/launcher_utility_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_folder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/install_jar_button"
+            android:layout_width="@dimen/launcher_utility_target"
+            android:layout_height="@dimen/launcher_utility_target"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/launcher_utility_item"
+            android:clickable="true"
+            android:contentDescription="@string/main_install_jar_file"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="@id/utility_rail"
+            app:layout_constraintStart_toStartOf="@id/utility_rail"
+            app:layout_constraintTop_toBottomOf="@id/open_main_dir_button"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:layout_width="@dimen/launcher_utility_icon"
+                android:layout_height="@dimen/launcher_utility_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_java"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/share_logs_button"
+            android:layout_width="@dimen/launcher_utility_target"
+            android:layout_height="@dimen/launcher_utility_target"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:background="@drawable/launcher_utility_item"
+            android:clickable="true"
+            android:contentDescription="@string/main_share_logs"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/utility_rail"
+            app:layout_constraintStart_toStartOf="@id/utility_rail"
+            app:layout_constraintTop_toBottomOf="@id/install_jar_button"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:layout_width="@dimen/launcher_utility_icon"
+                android:layout_height="@dimen/launcher_utility_icon"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <TextView
+            android:id="@+id/about_text"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:alpha="0"
+            android:background="@drawable/launcher_tooltip"
+            android:importantForAccessibility="no"
+            android:maxLines="1"
+            android:textColor="@color/launcher_text_primary"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/about_button"
+            app:layout_constraintEnd_toStartOf="@id/about_button"
+            app:layout_constraintTop_toTopOf="@id/about_button"
+            tools:text="អំពីកម្មវិធី" />
+
+        <TextView
+            android:id="@+id/custom_control_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:alpha="0"
+            android:background="@drawable/launcher_tooltip"
+            android:importantForAccessibility="no"
+            android:maxLines="1"
+            android:text="@string/custom_control_title"
+            android:textColor="@color/launcher_text_primary"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/custom_control_button"
+            app:layout_constraintEnd_toStartOf="@id/custom_control_button"
+            app:layout_constraintTop_toTopOf="@id/custom_control_button" />
+
+        <TextView
+            android:id="@+id/open_main_dir_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:alpha="0"
+            android:background="@drawable/launcher_tooltip"
+            android:importantForAccessibility="no"
+            android:maxLines="1"
+            android:text="@string/main_open_main_dir"
+            android:textColor="@color/launcher_text_primary"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/open_main_dir_button"
+            app:layout_constraintEnd_toStartOf="@id/open_main_dir_button"
+            app:layout_constraintTop_toTopOf="@id/open_main_dir_button" />
+
+        <TextView
+            android:id="@+id/install_jar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:alpha="0"
+            android:background="@drawable/launcher_tooltip"
+            android:importantForAccessibility="no"
+            android:maxLines="1"
+            android:text="@string/main_install_jar_file"
+            android:textColor="@color/launcher_text_primary"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/install_jar_button"
+            app:layout_constraintEnd_toStartOf="@id/install_jar_button"
+            app:layout_constraintTop_toTopOf="@id/install_jar_button" />
+
+        <TextView
+            android:id="@+id/share_logs_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:alpha="0"
+            android:background="@drawable/launcher_tooltip"
+            android:importantForAccessibility="no"
+            android:maxLines="1"
+            android:text="@string/main_share_logs"
+            android:textColor="@color/launcher_text_primary"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/share_logs_button"
+            app:layout_constraintEnd_toStartOf="@id/share_logs_button"
+            app:layout_constraintTop_toTopOf="@id/share_logs_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Compact weighted control dock: 22% account, 13% add, 35% version, 30% play. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/play_layout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/launcher_dock_height"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_86sdp"
+        android:layout_marginBottom="@dimen/_14sdp"
+        android:background="@drawable/launcher_dock_panel"
+        android:padding="@dimen/launcher_dock_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_max="@dimen/launcher_dock_max_width">
+
+        <include
+            android:id="@+id/view_account"
+            layout="@layout/view_launcher_account"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/account_divider"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/account_divider"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:background="@color/launcher_glass_divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/add_account_button"
+            app:layout_constraintStart_toEndOf="@id/view_account"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/add_account_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/launcher_account_section"
+            android:clickable="true"
+            android:contentDescription="@string/account_add"
+            android:focusable="true"
+            android:minHeight="@dimen/_48sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/version_divider"
+            app:layout_constraintHorizontal_weight="13"
+            app:layout_constraintStart_toEndOf="@id/account_divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:id="@+id/add_account_icon"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_add"
+                app:layout_constraintBottom_toTopOf="@id/add_account_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:tint="@color/launcher_text_primary" />
+
+            <TextView
+                android:id="@+id/add_account_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:text="@string/account_add"
+                android:textColor="@color/launcher_text_primary"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_account_icon" />
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <View
+            android:id="@+id/version_divider"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:background="@color/launcher_glass_divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/version"
+            app:layout_constraintStart_toEndOf="@id/add_account_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/version"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_7sdp"
+            android:background="@drawable/launcher_version_card"
+            android:clickable="true"
+            android:contentDescription="@string/launcher_version_selector"
+            android:focusable="true"
+            android:minHeight="@dimen/_48sdp"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_38sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/play_buttons_layout"
+            app:layout_constraintHorizontal_weight="35"
+            app:layout_constraintStart_toEndOf="@id/version_divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:id="@+id/version_icon"
+                android:layout_width="@dimen/_38sdp"
+                android:layout_height="@dimen/_38sdp"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_minecraft"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/version_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:ellipsize="end"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:textColor="@color/launcher_text_primary"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/version_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/version_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Minecraft 1.20.4" />
+
+            <TextView
+                android:id="@+id/version_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:ellipsize="end"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:textColor="@color/launcher_text_secondary"
+                android:textSize="@dimen/_9ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/version_icon"
+                app:layout_constraintTop_toBottomOf="@id/version_name"
+                tools:text="Fabric · Installed" />
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/manager_profile_button"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/launcher_manage_version"
+            android:focusable="true"
+            android:padding="@dimen/_11sdp"
+            android:rotation="90"
+            android:src="@drawable/ic_spinner_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/version"
+            app:layout_constraintEnd_toEndOf="@id/version"
+            app:layout_constraintTop_toTopOf="@id/version"
+            app:tint="@color/launcher_text_primary" />
+
+        <ProgressBar
+            android:id="@+id/version_loading"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:indeterminateTint="@color/launcher_accent_gold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/version"
+            app:layout_constraintEnd_toEndOf="@id/version"
+            app:layout_constraintTop_toTopOf="@id/version" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/play_buttons_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_2sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="30"
+            app:layout_constraintStart_toEndOf="@id/version"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+                android:id="@+id/play_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/launcher_play_button"
+                android:clickable="true"
+                android:contentDescription="@string/launcher_play_ready"
+                android:focusable="true"
+                android:minHeight="@dimen/_48sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:ripple_for_constraint="true">
+
+                <TextView
+                    android:id="@+id/play_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:includeFontPadding="true"
+                    android:lineSpacingExtra="2dp"
+                    android:maxLines="1"
+                    android:text="@string/launcher_play_label"
+                    android:textColor="@color/launcher_accent_gold"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/play_button_icon"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/play_button_icon"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_play"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/play_button_text"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/play_button_progress"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:indeterminateTint="@color/launcher_accent_gold"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/play_button_text"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,19 @@
+ANGKOR LAUNCHER — FULL RENAME
+
+បានប្តូរឈ្មោះទាំងស្រុង៖
+
+- Android module: AngkorLauncher
+- Application/package ID: com.movtery.angkorlauncher
+- App name: Angkor Launcher
+- Code identifiers, imports, Manifest, JNI references, Gradle paths និង GitHub workflow
+- Source folder: com/movtery/angkorlauncher
+
+Build APK នៅ project root៖
+
+  .\gradlew.bat :AngkorLauncher:assembleDebug --no-configuration-cache
+
+APK output៖
+
+  AngkorLauncher\build\outputs\apk\debug\
+
+ចំណាំ៖ ដោយសារ application ID បានប្តូរ Android នឹងចាត់ទុក Angkor Launcher ជា app ថ្មី ដាច់ដោយឡែកពី app ដែលប្រើ package ID ចាស់។

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black_or_white">#2B2118</color>
+
+    <color name="background_app">#E4D3B0</color>
+    <!-- Solid fallback shown below the Minecraft renderer while the game is starting. -->
+    <color name="background_game">#101820</color>
+    <color name="background_app_error">#D6A19A</color>
+    <color name="background_overlay">#33FFF9EE</color>
+    <color name="background_status_bar">#44362D22</color>
+    <color name="background_menu_top">#44362D22</color>
+    <color name="background_menu_top_error">#7B241C</color>
+    <color name="background_menu_element">#C9A227</color>
+    <color name="background_ripple_effect">#D4AF37</color>
+
+    <color name="button_background">#3DFFF9EE</color>
+    <color name="button_background_selected">#70D4AF37</color>
+    <color name="dialog_background">#80FFF9EE</color>
+
+    <color name="menu_bar">#44362D22</color>
+    <color name="menu_bar_text">#FFF8E8</color>
+    <color name="menu_overlay">#3DFFF9EE</color>
+    <color name="menu_progress">#C9A227</color>
+
+    <color name="background_item">#2EFFF9EE</color>
+    <color name="background_item_selected">#55E5C75D</color>
+    <color name="background_item_disabled">#22E4D3B0</color>
+    <color name="background_sponsor_intermediate">#CCC9A227</color>
+    <color name="background_sponsor_advanced">#CC7B241C</color>
+
+    <color name="edit_box_fill">#3DFFF9EE</color>
+    <color name="edit_box_fill_selected">#70FFF9EE</color>
+
+    <color name="mod_category_fill">#33FFF9EE</color>
+    <color name="text_background_fill">#3DFFF9EE</color>
+
+    <color name="settings_category">#3B5240</color>
+
+    <color name="favorite_color">#D4AF37</color>
+
+    <color name="icon_color">#362D22</color>
+
+    <color name="primary_text">#2B2118</color>
+
+    <!-- Liquid Glass surfaces: translucent by design so the Angkor hero remains visible. -->
+    <color name="glass_surface">#2AFFF9EE</color>
+    <color name="glass_surface_strong">#45FFF9EE</color>
+    <color name="glass_surface_subtle">#33FFFFFF</color>
+    <color name="glass_surface_selected">#55E5C75D</color>
+    <color name="glass_border">#55FFFFFF</color>
+    <color name="glass_border_soft">#2AFFFDF6</color>
+    <color name="glass_highlight">#55FFFFFF</color>
+    <color name="glass_shadow">#220E1726</color>
+    <color name="glass_pressed">#70D4AF37</color>
+    <color name="glass_toolbar_start">#40172231</color>
+    <color name="glass_toolbar_end">#55362D22</color>
+
+    <!-- Download browser surfaces: a darker translucent layer keeps Khmer text readable over the hero image. -->
+    <color name="download_panel_fill">#99202A36</color>
+    <color name="download_field_fill">#7A111B26</color>
+    <color name="download_panel_border">#99FFF9EE</color>
+    <color name="download_text_primary">#FFF8E8</color>
+    <color name="download_text_secondary">#E7D9C2</color>
+    <color name="download_error_text">#FFFF9B93</color>
+    <color name="launcher_play_text">#241A0C</color>
+
+    <!-- Angkor launcher landscape workspace. These surfaces darken only their own bounds. -->
+    <color name="launcher_glass_fill">#C0111C29</color>
+    <color name="launcher_glass_fill_pressed">#D01A2A3A</color>
+    <color name="launcher_glass_border">#99DCE4EA</color>
+    <color name="launcher_glass_divider">#55DCE4EA</color>
+    <color name="launcher_tooltip_fill">#E20B1521</color>
+    <color name="launcher_text_primary">#FFFFFFFF</color>
+    <color name="launcher_text_secondary">#D8E0E6</color>
+    <color name="launcher_accent_gold">#F0C96B</color>
+    <color name="launcher_play_start">#B53B743B</color>
+    <color name="launcher_play_end">#D523552B</color>
+    <color name="launcher_play_pressed_start">#D12D5D32</color>
+    <color name="launcher_play_pressed_end">#E51B4124</color>
+    <color name="launcher_disabled_overlay">#66172231</color>
+
+    <!-- Controller Profiles Liquid Glass surfaces. -->
+    <color name="control_panel_fill">#A6101B29</color>
+    <color name="control_panel_fill_strong">#BC0B1521</color>
+    <color name="control_panel_border">#80E7EDF2</color>
+    <color name="control_panel_highlight">#70FFFFFF</color>
+    <color name="control_panel_shadow">#40000000</color>
+    <color name="control_item_fill">#70172231</color>
+    <color name="control_item_selected">#A026303B</color>
+    <color name="control_item_pressed">#B32A3541</color>
+    <color name="control_gold_soft">#40F0C96B</color>
+    <color name="control_disabled">#55131D29</color>
+
+    <!-- Settings navigation rail: a slim translucent glass bar kept clear of the content pane. -->
+    <color name="settings_rail_fill">#88202A36</color>
+    <color name="settings_rail_border">#66FFF9EE</color>
+    <color name="settings_rail_selected">#66D4AF37</color>
+
+    <!-- Renderer configuration Liquid Glass palette. -->
+    <color name="renderer_panel_fill">#A61A2532</color>
+    <color name="renderer_card_fill">#8C202B38</color>
+    <color name="renderer_card_fill_pressed">#B32B3744</color>
+    <color name="renderer_border">#80FFF9EE</color>
+    <color name="renderer_divider">#44FFF9EE</color>
+    <color name="renderer_text_primary">#FFF8E8</color>
+    <color name="renderer_text_secondary">#DCCFBC</color>
+    <color name="renderer_gold_fill">#99B58B2C</color>
+    <color name="renderer_tooltip_text">#FFF7DC</color>
+
+    <!-- Liquid Glass toggle controls. -->
+    <color name="switch_track_off">#3DFFFFFF</color>
+    <color name="switch_track_on">#55D4AF37</color>
+    <color name="switch_thumb_off">#D9F2F4F5</color>
+    <color name="switch_thumb_on">#E6D4AF37</color>
+    <color name="switch_thumb_stroke">#99FFFFFF</color>
+    <color name="switch_shadow">#33000000</color>
+</resources>

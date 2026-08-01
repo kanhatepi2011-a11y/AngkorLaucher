@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A muted scrim keeps the supplied Angkor scene visible without competing with controls. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="#24101A22"
+        android:centerColor="#5A101820"
+        android:endColor="#A8101820" />
+</shape>

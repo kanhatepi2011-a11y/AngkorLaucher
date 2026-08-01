@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Khmer diacritics need additional vertical room in editable text fields. -->
+    <dimen name="padding_input_bottom">@dimen/_14sdp</dimen>
+    <dimen name="padding_input_top">@dimen/_13sdp</dimen>
+</resources>

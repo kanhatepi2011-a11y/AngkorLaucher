@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/_8sdp" />
+            <gradient android:angle="270" android:startColor="@color/edit_box_fill_selected" android:endColor="@color/glass_surface" />
+            <stroke android:width="@dimen/_1sdp" android:color="@color/glass_pressed" />
+        </shape>
+    </item>
+    <item android:height="@dimen/_1sdp" android:gravity="top" android:left="@dimen/_5sdp" android:right="@dimen/_5sdp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_highlight" />
+        </shape>
+    </item>
+</layer-list>

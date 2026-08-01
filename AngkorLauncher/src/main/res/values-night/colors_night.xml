@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black_or_white">#F8EFD8</color>
+
+    <color name="background_app">#362D22</color>
+    <!-- Keep game startup free of the launcher/editor artwork in dark mode too. -->
+    <color name="background_game">#05080D</color>
+    <color name="background_app_error">#5A241E</color>
+    <color name="background_overlay">#331A2635</color>
+    <color name="background_status_bar">#660B1420</color>
+    <color name="background_menu_top">#660B1420</color>
+    <color name="background_menu_top_error">#7B241C</color>
+    <color name="background_menu_element">#C9A227</color>
+    <color name="background_ripple_effect">#D4AF37</color>
+
+    <color name="button_background">#3D1D2A3A</color>
+    <color name="button_background_selected">#708E7526</color>
+    <color name="dialog_background">#801A2534</color>
+
+    <color name="menu_bar">#660B1420</color>
+    <color name="menu_overlay">#3D1A2534</color>
+    <color name="menu_progress">#D4AF37</color>
+
+    <color name="background_item">#3D1D2A3A</color>
+    <color name="background_item_selected">#608E7526</color>
+    <color name="background_item_disabled">#224D5966</color>
+    <color name="background_sponsor_intermediate">#B3A87E1F</color>
+    <color name="background_sponsor_advanced">#B37B241C</color>
+
+    <color name="edit_box_fill">#3D1D2A3A</color>
+    <color name="edit_box_fill_selected">#7026364A</color>
+
+    <color name="mod_category_fill">#33263342</color>
+    <color name="text_background_fill">#3D1D2A3A</color>
+
+    <color name="settings_category">#3B5240</color>
+
+    <color name="icon_color">#F8EFD8</color>
+
+    <color name="primary_text">#F8EFD8</color>
+
+    <!-- Dark Liquid Glass surfaces. -->
+    <color name="glass_surface">#3D1D2A3A</color>
+    <color name="glass_surface_strong">#551A2534</color>
+    <color name="glass_surface_subtle">#33263342</color>
+    <color name="glass_surface_selected">#608E7526</color>
+    <color name="glass_border">#44FFFFFF</color>
+    <color name="glass_border_soft">#22FFFFFF</color>
+    <color name="glass_highlight">#44FFFFFF</color>
+    <color name="glass_shadow">#44000000</color>
+    <color name="glass_pressed">#70C9A227</color>
+    <color name="glass_toolbar_start">#550B1420</color>
+    <color name="glass_toolbar_end">#5A1A2534</color>
+
+    <!-- Stronger dark glass for readable Khmer text in the download browser. -->
+    <color name="download_panel_fill">#CC0B1420</color>
+    <color name="download_field_fill">#B30E1724</color>
+    <color name="download_panel_border">#AAFFF8E8</color>
+    <color name="download_text_primary">#FFF8E8</color>
+    <color name="download_text_secondary">#E7D9C2</color>
+    <color name="download_error_text">#FFFF9B93</color>
+    <color name="launcher_play_text">#241A0C</color>
+
+    <!-- Angkor launcher landscape workspace. Keep the same contrast in night mode. -->
+    <color name="launcher_glass_fill">#D00B1521</color>
+    <color name="launcher_glass_fill_pressed">#E0142332</color>
+    <color name="launcher_glass_border">#99DCE4EA</color>
+    <color name="launcher_glass_divider">#55DCE4EA</color>
+    <color name="launcher_tooltip_fill">#F00A131E</color>
+    <color name="launcher_text_primary">#FFFFFFFF</color>
+    <color name="launcher_text_secondary">#D8E0E6</color>
+    <color name="launcher_accent_gold">#F0C96B</color>
+    <color name="launcher_play_start">#C638703B</color>
+    <color name="launcher_play_end">#E0204D29</color>
+    <color name="launcher_play_pressed_start">#E12B5B31</color>
+    <color name="launcher_play_pressed_end">#F0183D21</color>
+    <color name="launcher_disabled_overlay">#77101A27</color>
+
+    <!-- Controller Profiles Liquid Glass surfaces. -->
+    <color name="control_panel_fill">#B30A1420</color>
+    <color name="control_panel_fill_strong">#CC08111C</color>
+    <color name="control_panel_border">#80E7EDF2</color>
+    <color name="control_panel_highlight">#66FFFFFF</color>
+    <color name="control_panel_shadow">#55000000</color>
+    <color name="control_item_fill">#80101B28</color>
+    <color name="control_item_selected">#AD202C39</color>
+    <color name="control_item_pressed">#C02A3541</color>
+    <color name="control_gold_soft">#40F0C96B</color>
+    <color name="control_disabled">#66101A25</color>
+
+    <!-- Dark settings navigation rail glass. -->
+    <color name="settings_rail_fill">#AA0B1420</color>
+    <color name="settings_rail_border">#66FFF8E8</color>
+    <color name="settings_rail_selected">#80C9A227</color>
+
+    <!-- Renderer configuration Liquid Glass palette. -->
+    <color name="renderer_panel_fill">#C20A1420</color>
+    <color name="renderer_card_fill">#A6101B28</color>
+    <color name="renderer_card_fill_pressed">#C8243140</color>
+    <color name="renderer_border">#80FFF8E8</color>
+    <color name="renderer_divider">#44FFF8E8</color>
+    <color name="renderer_text_primary">#FFF8E8</color>
+    <color name="renderer_text_secondary">#DCCFBC</color>
+    <color name="renderer_gold_fill">#A68E7526</color>
+    <color name="renderer_tooltip_text">#FFF7DC</color>
+
+    <!-- Dark Liquid Glass toggle controls. -->
+    <color name="switch_track_off">#441D2A3A</color>
+    <color name="switch_track_on">#608E7526</color>
+    <color name="switch_thumb_off">#CCD9E0E5</color>
+    <color name="switch_thumb_on">#D9C9A227</color>
+    <color name="switch_thumb_stroke">#80FFFFFF</color>
+    <color name="switch_shadow">#55000000</color>
+</resources>

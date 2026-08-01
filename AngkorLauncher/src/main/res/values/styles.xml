@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="LiquidGlassSwitch" parent="@style/Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="android:track">@drawable/switch_track</item>
+        <item name="android:splitTrack">false</item>
+        <item name="android:showText">false</item>
+        <item name="android:minWidth">@dimen/_48sdp</item>
+    </style>
+
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:statusBarColor">@color/background_status_bar</item>
+        <item name="android:navigationBarColor">@color/background_app</item>
+        <item name="android:scrollbarThumbHorizontal">@color/background_menu_element</item>
+        <item name="android:scrollbarThumbVertical">@color/background_menu_element</item>
+        <item name="android:colorAccent">@color/background_menu_element</item>
+        <item name="colorAccent">@color/background_menu_element</item>
+        <item name="android:colorControlHighlight">@color/glass_surface_subtle</item>
+        <item name="colorControlHighlight">@color/glass_surface_subtle</item>
+        <item name="android:switchStyle">@style/LiquidGlassSwitch</item>
+        <item name="switchStyle">@style/LiquidGlassSwitch</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:fontFamily">@font/noto_sans_khmer</item>
+    </style>
+
+    <style name="CustomDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:scrollbarThumbHorizontal">@color/background_menu_element</item>
+        <item name="android:scrollbarThumbVertical">@color/background_menu_element</item>
+        <item name="android:colorAccent">@color/background_menu_element</item>
+        <item name="colorAccent">@color/background_menu_element</item>
+        <item name="android:colorControlHighlight">@color/glass_surface_subtle</item>
+        <item name="colorControlHighlight">@color/glass_surface_subtle</item>
+        <item name="android:switchStyle">@style/LiquidGlassSwitch</item>
+        <item name="switchStyle">@style/LiquidGlassSwitch</item>
+        <item name="android:fontFamily">@font/noto_sans_khmer</item>
+    </style>
+
+    <style name="CustomAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:scrollbarThumbHorizontal">@color/background_menu_element</item>
+        <item name="android:scrollbarThumbVertical">@color/background_menu_element</item>
+        <item name="android:colorAccent">@color/background_menu_element</item>
+        <item name="colorAccent">@color/background_menu_element</item>
+        <item name="android:colorControlHighlight">@color/glass_surface_subtle</item>
+        <item name="colorControlHighlight">@color/glass_surface_subtle</item>
+        <item name="android:switchStyle">@style/LiquidGlassSwitch</item>
+        <item name="switchStyle">@style/LiquidGlassSwitch</item>
+        <item name="android:fontFamily">@font/noto_sans_khmer</item>
+    </style>
+
+    <style name="RoundedCornersImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4%</item>
+    </style>
+
+    <style name="RoundImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RendererSecondaryCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/renderer_secondary_min_height</item>
+        <item name="android:background">@drawable/renderer_card_glass</item>
+        <item name="android:focusable">true</item>
+        <item name="android:padding">@dimen/renderer_secondary_padding</item>
+    </style>
+
+    <style name="RendererSettingTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:includeFontPadding">true</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textColor">@color/renderer_text_primary</item>
+        <item name="android:textSize">@dimen/_11ssp</item>
+    </style>
+
+    <style name="RendererSettingSummary">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:includeFontPadding">true</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:maxLines">5</item>
+        <item name="android:textColor">@color/renderer_text_secondary</item>
+        <item name="android:textSize">@dimen/_9ssp</item>
+    </style>
+
+    <style name="RendererSettingSwitch" parent="@style/LiquidGlassSwitch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <!-- Shared responsive card system for every Settings page. -->
+    <style name="SettingsGlassCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/settings_page_card_min_height</item>
+        <item name="android:background">@drawable/renderer_card_glass</item>
+        <item name="android:focusable">true</item>
+        <item name="android:padding">@dimen/settings_page_card_padding</item>
+    </style>
+
+    <style name="SettingsGlassSwitch" parent="@style/LiquidGlassSwitch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+</resources>

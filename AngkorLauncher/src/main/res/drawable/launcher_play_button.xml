@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/launcher_play_radius" />
+            <gradient
+                android:angle="270"
+                android:startColor="@color/launcher_play_pressed_start"
+                android:endColor="@color/launcher_play_pressed_end" />
+            <stroke android:width="@dimen/_2sdp" android:color="@color/launcher_accent_gold" />
+        </shape>
+    </item>
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/launcher_play_radius" />
+            <solid android:color="@color/launcher_disabled_overlay" />
+            <stroke android:width="@dimen/_1sdp" android:color="@color/glass_border_soft" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/launcher_play_radius" />
+            <gradient
+                android:angle="270"
+                android:startColor="@color/launcher_play_start"
+                android:endColor="@color/launcher_play_end" />
+            <stroke android:width="@dimen/_2sdp" android:color="@color/launcher_accent_gold" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/launcher_play_radius" />
+            <gradient
+                android:angle="270"
+                android:startColor="@color/launcher_play_start"
+                android:endColor="@color/launcher_play_end" />
+            <stroke android:width="@dimen/_2sdp" android:color="@color/launcher_accent_gold" />
+        </shape>
+    </item>
+</selector>

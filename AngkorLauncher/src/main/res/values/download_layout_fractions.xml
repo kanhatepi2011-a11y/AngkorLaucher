@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <fraction name="download_results_start">7%</fraction>
+    <fraction name="download_results_end">49%</fraction>
+    <fraction name="download_controls_start">51%</fraction>
+    <fraction name="download_controls_end">93%</fraction>
+</resources>

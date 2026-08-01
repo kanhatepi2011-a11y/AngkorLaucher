@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="96dp"
+    android:viewportWidth="360"
+    android:viewportHeight="96">
+
+    <!-- Low-contrast five-tower Angkor Wat silhouette for the splash title bar. -->
+    <path
+        android:fillColor="#403B5240"
+        android:pathData="M0,96V78H24V70H36V48H42V36H48V48H54V70H66V78H92V70H104V43H110V25H116V43H122V70H134V78H150V65H162V30H168V8H174V30H180V65H192V78H208V70H220V43H226V25H232V43H238V70H250V78H276V70H288V48H294V36H300V48H306V70H318V78H336V72H348V78H360V96Z" />
+</vector>

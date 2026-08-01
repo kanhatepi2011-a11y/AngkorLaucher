@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="@dimen/_10sdp" />
+    <padding android:bottom="@dimen/_2sdp" android:left="@dimen/_2sdp" android:right="@dimen/_2sdp" android:top="@dimen/_2sdp" />
+    <gradient android:angle="270" android:startColor="@color/glass_toolbar_start" android:endColor="@color/glass_toolbar_end" />
+    <stroke android:width="@dimen/_1sdp" android:color="@color/glass_border" />
+</shape>

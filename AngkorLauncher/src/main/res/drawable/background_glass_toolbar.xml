@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:startColor="@color/glass_toolbar_start"
+                android:endColor="@color/glass_toolbar_end" />
+        </shape>
+    </item>
+    <item android:height="@dimen/_1sdp" android:gravity="bottom">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:startColor="@color/glass_highlight"
+                android:endColor="@android:color/transparent" />
+        </shape>
+    </item>
+</layer-list>

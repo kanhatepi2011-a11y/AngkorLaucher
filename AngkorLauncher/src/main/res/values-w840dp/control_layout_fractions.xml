@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Large landscape and tablets: balanced reference margins and equal top controls. -->
+    <fraction name="control_left_start">6%</fraction>
+    <fraction name="control_left_end">35%</fraction>
+    <fraction name="control_right_start">65%</fraction>
+    <fraction name="control_right_end">94%</fraction>
+    <fraction name="control_panel_height">100%</fraction>
+</resources>

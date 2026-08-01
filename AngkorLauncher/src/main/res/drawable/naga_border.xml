@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="12dp"
+    android:viewportWidth="360"
+    android:viewportHeight="12">
+
+    <!-- Naga-like wave with small lotus diamonds, kept deliberately subtle. -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,5 C18,1 30,9 45,5 C60,1 72,9 87,5 C102,1 114,9 129,5 C144,1 156,9 171,5 C186,1 198,9 213,5 C228,1 240,9 255,5 C270,1 282,9 297,5 C312,1 324,9 339,5 C347,3 353,4 360,5"
+        android:strokeColor="#66D4AF37"
+        android:strokeLineCap="round"
+        android:strokeWidth="1.5" />
+    <path
+        android:fillColor="#66D4AF37"
+        android:pathData="M45,2L48,5L45,8L42,5ZM129,2L132,5L129,8L126,5ZM213,2L216,5L213,8L210,5ZM297,2L300,5L297,8L294,5Z" />
+</vector>

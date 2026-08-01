@@ -1,0 +1,14 @@
+ANGKOR LAUNCHER — UPDATE PATCH
+
+របៀបដំឡើង៖
+
+1. Extract ឯកសារ AngkorLauncher-main.zip ដើមសិន។
+2. Extract ឯកសារ Angkor-Launcher-update-patch.zip នៅទីតាំង parent ដូចគ្នា។
+3. នៅពេលសួរ សូមជ្រើស Replace / Overwrite All។
+4. បើកគម្រោង ហើយ Build ដោយប្រើ៖
+   .\gradlew.bat :AngkorLauncher:assembleDebug --no-configuration-cache
+
+Patch នេះរួមមាន៖
+- UI ផ្ទាំង Launcher ស្អាត និងតូចជាងមុន
+- Animation និង progress ជាភាគរយ ព្រមទាំងពេលវេលានៅសល់ ពេលដំឡើង
+- លុបផ្ទាំងឈ្មោះអ្នកចូលរួម ការថ្លែងអំណរគុណ និងអ្នកឧបត្ថម្ភ

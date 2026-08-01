@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/download_resource_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/download_results_start_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/download_results_end_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.49" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/download_controls_start_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.51" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/download_controls_end_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.93" />
+
+    <!-- Search results remain fully functional while using transparent spacing between cards. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/download_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/download_column_outer_margin"
+        android:layout_marginBottom="@dimen/download_results_bottom_clearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/download_results_end_guide"
+        app:layout_constraintStart_toStartOf="@id/download_results_start_guide"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:contentDescription="@string/download_ui_search"
+            android:paddingBottom="@dimen/download_workspace_gap"
+            android:scrollbarThumbVertical="@color/launcher_accent_gold"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loading_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/download_workspace_card"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/loading_progress"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:indeterminateTint="@color/launcher_accent_gold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:includeFontPadding="true"
+                android:lineSpacingExtra="2dp"
+                android:text="@string/generic_loading"
+                android:textColor="@color/download_text_primary"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loading_progress" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:background="@drawable/download_workspace_card"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:lineSpacingExtra="3dp"
+            android:padding="16dp"
+            android:textColor="@color/download_error_text"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/back_to_top"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/download_round_action"
+            android:contentDescription="@string/download_back_to_top"
+            android:focusable="true"
+            android:padding="12dp"
+            android:rotation="-90"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_spinner_arrow_right"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/download_text_primary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Right-side controls: vertically scrollable on short landscape phones. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/operate_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/download_column_outer_margin"
+        android:layout_marginBottom="@dimen/download_column_outer_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/download_controls_end_guide"
+        app:layout_constraintStart_toStartOf="@id/download_controls_start_guide"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/shadowView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/operate_main_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="ifContentScrolls"
+            android:paddingBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="@dimen/download_primary_controls_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Search card -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/search_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/download_top_card_height"
+                    android:background="@drawable/download_result_item"
+                    android:padding="@dimen/download_result_card_padding">
+
+                    <TextView
+                        android:id="@+id/search_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="true"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/download_ui_search"
+                        android:textColor="@color/download_text_primary"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="@id/reset"
+                        app:layout_constraintEnd_toStartOf="@id/reset"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/reset" />
+
+                    <ImageButton
+                        android:id="@+id/reset"
+                        android:layout_width="@dimen/download_top_action_size"
+                        android:layout_height="@dimen/download_top_action_size"
+                        android:background="@drawable/download_round_action"
+                        android:contentDescription="@string/generic_reset"
+                        android:focusable="true"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_reset"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/download_text_primary" />
+
+                    <com.movtery.angkorlauncher.ui.view.AnimEditText
+                        android:id="@+id/name_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/download_search_field_height"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/download_workspace_field"
+                        android:hint="@string/generic_search"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingHorizontal="16dp"
+                        android:singleLine="true"
+                        android:textColor="@color/download_text_primary"
+                        android:textColorHint="@color/download_text_secondary"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintEnd_toStartOf="@id/search_action_container"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/reset" />
+
+                    <FrameLayout
+                        android:id="@+id/search_action_container"
+                        android:layout_width="@dimen/download_search_field_height"
+                        android:layout_height="@dimen/download_search_field_height"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/download_workspace_primary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/reset">
+
+                        <com.movtery.angkorlauncher.ui.view.AnimButton
+                            android:id="@+id/search_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/generic_search"
+                            android:drawableStart="@drawable/ic_search"
+                            android:drawableTint="@color/launcher_accent_gold"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:minHeight="48dp"
+                            android:padding="14dp" />
+
+                        <ProgressBar
+                            android:id="@+id/search_progress"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="@dimen/download_search_progress_size"
+                            android:layout_height="@dimen/download_search_progress_size"
+                            android:layout_gravity="center"
+                            android:indeterminateTint="@color/launcher_accent_gold"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Equal Minecraft and source selectors -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/download_selector_row_height"
+                    android:layout_marginTop="@dimen/download_workspace_card_gap"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/mc_version_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/download_workspace_card"
+                        android:orientation="vertical"
+                        android:padding="@dimen/download_workspace_card_padding">
+
+                        <TextView
+                            android:id="@+id/mc_version_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="true"
+                            android:lineSpacingExtra="2dp"
+                            android:text="@string/download_ui_mc_version"
+                            android:textColor="@color/download_text_secondary"
+                            android:textSize="@dimen/_11ssp" />
+
+                        <com.movtery.angkorlauncher.ui.view.AnimTextView
+                            android:id="@+id/selected_mc_version_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/download_workspace_selector_height"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/download_workspace_field"
+                            android:clickable="true"
+                            android:drawableEnd="@drawable/download_chevron_down"
+                            android:drawablePadding="8dp"
+                            android:drawableTint="@color/download_text_primary"
+                            android:ellipsize="end"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:hint="@string/version_select_hint"
+                            android:maxLines="2"
+                            android:minHeight="48dp"
+                            android:paddingHorizontal="14dp"
+                            android:textColor="@color/download_text_primary"
+                            android:textColorHint="@color/download_text_secondary"
+                            android:textSize="@dimen/_11ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/platform_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/download_workspace_card"
+                        android:orientation="vertical"
+                        android:padding="@dimen/download_workspace_card_padding">
+
+                        <TextView
+                            android:id="@+id/platform_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="true"
+                            android:lineSpacingExtra="2dp"
+                            android:text="@string/download_ui_platform"
+                            android:textColor="@color/download_text_secondary"
+                            android:textSize="@dimen/_11ssp" />
+
+                        <com.skydoves.powerspinner.PowerSpinnerView
+                            android:id="@+id/platform_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/download_workspace_selector_height"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/download_workspace_field"
+                            android:ellipsize="end"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:minHeight="48dp"
+                            android:paddingHorizontal="14dp"
+                            android:textColor="@color/download_text_primary"
+                            android:textSize="@dimen/_11ssp"
+                            app:spinner_arrow_tint="@color/download_text_primary"
+                            app:spinner_popup_background="@drawable/download_workspace_card"
+                            app:spinner_popup_height="120dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Existing advanced filters stay available in a compact horizontal strip. -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/download_workspace_card_gap"
+                    android:background="@drawable/download_workspace_card"
+                    android:padding="@dimen/download_workspace_card_padding">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true"
+                        android:overScrollMode="ifContentScrolls"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/sort_layout"
+                                android:layout_width="@dimen/download_filter_chip_width"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/sort_textview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="true"
+                                    android:maxLines="1"
+                                    android:text="@string/download_ui_sort_by"
+                                    android:textColor="@color/download_text_secondary"
+                                    android:textSize="@dimen/_9ssp" />
+
+                                <com.skydoves.powerspinner.PowerSpinnerView
+                                    android:id="@+id/sort_spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:layout_marginTop="6dp"
+                                    android:background="@drawable/download_workspace_field"
+                                    android:ellipsize="end"
+                                    android:focusable="true"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="12dp"
+                                    android:textColor="@color/download_text_primary"
+                                    android:textSize="@dimen/_10ssp"
+                                    app:spinner_arrow_tint="@color/download_text_primary"
+                                    app:spinner_popup_background="@drawable/download_workspace_card"
+                                    app:spinner_popup_height="200dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/category_layout"
+                                android:layout_width="@dimen/download_filter_chip_width"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/category_textview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="true"
+                                    android:maxLines="1"
+                                    android:text="@string/download_ui_category"
+                                    android:textColor="@color/download_text_secondary"
+                                    android:textSize="@dimen/_9ssp" />
+
+                                <com.skydoves.powerspinner.PowerSpinnerView
+                                    android:id="@+id/category_spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:layout_marginTop="6dp"
+                                    android:background="@drawable/download_workspace_field"
+                                    android:ellipsize="end"
+                                    android:focusable="true"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="12dp"
+                                    android:textColor="@color/download_text_primary"
+                                    android:textSize="@dimen/_10ssp"
+                                    app:spinner_arrow_tint="@color/download_text_primary"
+                                    app:spinner_popup_background="@drawable/download_workspace_card"
+                                    app:spinner_popup_height="200dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/modloader_layout"
+                                android:layout_width="@dimen/download_filter_chip_width"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/modloader_textview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="true"
+                                    android:maxLines="1"
+                                    android:text="@string/download_ui_modloader"
+                                    android:textColor="@color/download_text_secondary"
+                                    android:textSize="@dimen/_9ssp" />
+
+                                <com.skydoves.powerspinner.PowerSpinnerView
+                                    android:id="@+id/modloader_spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:layout_marginTop="6dp"
+                                    android:background="@drawable/download_workspace_field"
+                                    android:ellipsize="end"
+                                    android:focusable="true"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="12dp"
+                                    android:textColor="@color/download_text_primary"
+                                    android:textSize="@dimen/_10ssp"
+                                    app:spinner_arrow_tint="@color/download_text_primary"
+                                    app:spinner_popup_background="@drawable/download_workspace_card"
+                                    app:spinner_popup_height="200dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </FrameLayout>
+
+                <!-- Existing local-install and return callbacks, now in one aligned action dock. -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/download_workspace_card_gap"
+                    android:background="@drawable/download_workspace_card"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/download_workspace_action_padding"
+                    android:weightSum="2">
+
+                    <com.movtery.angkorlauncher.ui.view.AnimButton
+                        android:id="@+id/install_button"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/download_workspace_action_height"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/download_workspace_action"
+                        android:drawableStart="@drawable/ic_download"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/download_text_primary"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:minHeight="48dp"
+                        android:text="@string/download_ui_install_local"
+                        android:textAllCaps="false"
+                        android:textColor="@color/download_text_primary"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <com.movtery.angkorlauncher.ui.view.AnimButton
+                        android:id="@+id/return_button"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/download_workspace_action_height"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/download_workspace_action"
+                        android:drawableStart="@drawable/ic_play"
+                        android:drawablePadding="8dp"
+                        android:drawableTint="@color/download_text_primary"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:minHeight="48dp"
+                        android:text="@string/generic_return"
+                        android:textAllCaps="false"
+                        android:textColor="@color/download_text_primary"
+                        android:textSize="@dimen/_10ssp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

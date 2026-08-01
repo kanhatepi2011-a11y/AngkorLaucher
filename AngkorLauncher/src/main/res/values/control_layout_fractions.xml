@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Small and medium landscape: one full-width workspace with safe side margins. -->
+    <fraction name="control_left_start">3%</fraction>
+    <fraction name="control_left_end">34%</fraction>
+    <fraction name="control_right_start">66%</fraction>
+    <fraction name="control_right_end">97%</fraction>
+    <fraction name="control_panel_height">100%</fraction>
+</resources>

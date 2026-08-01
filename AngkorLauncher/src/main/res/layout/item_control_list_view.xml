@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/control_manager_row_half_gap"
+    android:background="@drawable/control_profile_item"
+    android:clickable="true"
+    android:focusable="true"
+    android:minHeight="@dimen/control_profile_row_min_height"
+    android:paddingHorizontal="@dimen/control_manager_row_horizontal_padding"
+    android:paddingVertical="@dimen/control_manager_row_vertical_padding"
+    app:ripple_for_constraint="true">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/control_profile_icon_box"
+        android:layout_height="@dimen/control_profile_icon_box"
+        android:background="@drawable/control_icon_well"
+        android:contentDescription="@null"
+        android:padding="@dimen/control_profile_icon_padding"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_menu_custom_controls"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/launcher_text_primary" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/control_manager_text_gap"
+        android:ellipsize="end"
+        android:includeFontPadding="true"
+        android:maxLines="1"
+        android:textColor="@color/launcher_text_primary"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/desc"
+        app:layout_constraintEnd_toStartOf="@id/info_button"
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="default.json" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/control_manager_text_gap"
+        android:ellipsize="end"
+        android:includeFontPadding="true"
+        android:lineSpacingExtra="1dp"
+        android:maxLines="1"
+        android:text="@string/controls_info_no_info"
+        android:textColor="@color/launcher_text_secondary"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/info_button"
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/info_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/desc"
+        app:layout_constraintStart_toStartOf="@id/desc"
+        app:layout_constraintTop_toBottomOf="@id/desc" />
+
+    <ImageButton
+        android:id="@+id/info_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/control_selected_check"
+        android:contentDescription="@string/controls_info_view"
+        android:focusable="true"
+        android:padding="13dp"
+        android:src="@drawable/ic_check"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FF17202A"
+        tools:visibility="visible" />
+
+</com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>

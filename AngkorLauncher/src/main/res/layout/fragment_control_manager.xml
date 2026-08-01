@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/controller_profiles_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/control_left_start_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/control_left_end_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.34" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/control_right_start_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/control_right_end_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <!-- Three equal-height controls. Their callbacks remain in ControlButtonFragment. -->
+    <LinearLayout
+        android:id="@+id/control_top_row"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/control_manager_top_control_height"
+        android:layout_marginStart="@dimen/control_manager_outer_horizontal_margin"
+        android:layout_marginTop="@dimen/control_manager_outer_vertical_margin"
+        android:layout_marginEnd="@dimen/control_manager_outer_horizontal_margin"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/import_profile_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/control_manager_surface"
+            android:clickable="true"
+            android:contentDescription="@string/controls_import_control"
+            android:focusable="true"
+            android:minHeight="48dp"
+            android:paddingHorizontal="@dimen/control_manager_control_padding"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:id="@+id/import_profile_icon"
+                android:layout_width="@dimen/control_manager_top_icon_size"
+                android:layout_height="@dimen/control_manager_top_icon_size"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_download"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+
+            <TextView
+                android:id="@+id/import_profile_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/control_manager_text_gap"
+                android:ellipsize="end"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:text="@string/controls_import_control"
+                android:textColor="@color/launcher_text_primary"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/import_profile_chevron"
+                app:layout_constraintStart_toEndOf="@id/import_profile_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/import_profile_chevron"
+                android:layout_width="@dimen/control_manager_chevron_size"
+                android:layout_height="@dimen/control_manager_chevron_size"
+                android:contentDescription="@null"
+                android:src="@drawable/download_chevron_down"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <Space
+            android:layout_width="@dimen/control_manager_top_gap"
+            android:layout_height="1dp" />
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/control_selector_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/control_manager_surface"
+            android:clickable="true"
+            android:contentDescription="@string/controls_selected_profile"
+            android:focusable="true"
+            android:minHeight="48dp"
+            android:paddingHorizontal="@dimen/control_manager_control_padding"
+            app:ripple_for_constraint="true">
+
+            <ImageView
+                android:id="@+id/profile_detail_icon"
+                android:layout_width="@dimen/control_manager_top_icon_size"
+                android:layout_height="@dimen/control_manager_top_icon_size"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_menu_custom_controls"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+
+            <TextView
+                android:id="@+id/control_selector_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/control_manager_text_gap"
+                android:ellipsize="middle"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:text="@string/controls_no_profile_selected"
+                android:textColor="@color/launcher_text_primary"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/control_selector_chevron"
+                app:layout_constraintStart_toEndOf="@id/profile_detail_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/control_selector_chevron"
+                android:layout_width="@dimen/control_manager_chevron_size"
+                android:layout_height="@dimen/control_manager_chevron_size"
+                android:contentDescription="@null"
+                android:src="@drawable/download_chevron_down"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        <Space
+            android:layout_width="@dimen/control_manager_top_gap"
+            android:layout_height="1dp" />
+
+        <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+            android:id="@+id/profile_operations_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/control_manager_surface"
+            android:clickable="true"
+            android:contentDescription="@string/controls_profile_file_actions"
+            android:focusable="true"
+            android:minHeight="48dp"
+            android:paddingHorizontal="@dimen/control_manager_control_padding"
+            app:ripple_for_constraint="true">
+
+            <View
+                android:id="@+id/profile_path_indicator"
+                android:layout_width="@dimen/control_manager_path_indicator_size"
+                android:layout_height="@dimen/control_manager_path_indicator_size"
+                android:background="@drawable/control_manager_path_indicator"
+                android:importantForAccessibility="no"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/profile_path_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/control_manager_text_gap"
+                android:ellipsize="middle"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:textColor="@color/launcher_text_secondary"
+                android:textSize="@dimen/_11ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/profile_more_icon"
+                app:layout_constraintStart_toEndOf="@id/profile_path_indicator"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="/storage/emulated/0/Android/data/com.angkorlauncher.khmer/controlmap" />
+
+            <ImageView
+                android:id="@+id/profile_more_icon"
+                android:layout_width="@dimen/control_manager_chevron_size"
+                android:layout_height="@dimen/control_manager_chevron_size"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_more"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+
+        </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+    </LinearLayout>
+
+    <!-- One spacious panel keeps the profile list, search, states and actions together. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/control_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/control_manager_outer_horizontal_margin"
+        android:layout_marginTop="@dimen/control_manager_panel_gap"
+        android:layout_marginEnd="@dimen/control_manager_outer_horizontal_margin"
+        android:layout_marginBottom="@dimen/control_manager_outer_vertical_margin"
+        android:background="@drawable/control_glass_panel"
+        android:padding="@dimen/control_panel_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/control_top_row">
+
+        <!-- Compact two-line information toolbar: title/count, then selected file/description. -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_info_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/control_manager_info_toolbar_height"
+            android:background="@drawable/control_manager_surface"
+            android:paddingHorizontal="@dimen/control_manager_control_padding"
+            android:paddingVertical="@dimen/control_manager_info_vertical_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/title_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:text="@string/custom_control_title"
+                android:textColor="@color/launcher_text_primary"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/profile_count_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/profile_count_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/control_manager_text_gap"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:textColor="@color/launcher_text_secondary"
+                android:textSize="@dimen/_9ssp"
+                app:layout_constraintBaseline_toBaselineOf="@id/title_view"
+                app:layout_constraintEnd_toStartOf="@id/profile_action_bar"
+                app:layout_constraintStart_toEndOf="@id/title_view"
+                tools:text="10 profiles" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_action_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/control_action_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/refresh_profile_button"
+                android:layout_width="@dimen/control_action_size"
+                android:layout_height="@dimen/control_action_size"
+                android:background="@drawable/control_action_button"
+                android:contentDescription="@string/generic_refresh"
+                android:focusable="true"
+                android:padding="@dimen/control_manager_icon_button_padding"
+                android:src="@drawable/ic_refresh"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/delete_profile_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+
+            <ImageButton
+                android:id="@+id/delete_profile_button"
+                android:layout_width="@dimen/control_action_size"
+                android:layout_height="@dimen/control_action_size"
+                android:layout_marginStart="@dimen/control_manager_text_gap"
+                android:background="@drawable/control_action_button"
+                android:contentDescription="@string/generic_delete"
+                android:focusable="true"
+                android:padding="@dimen/control_manager_icon_button_padding"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/refresh_profile_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/launcher_text_primary" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/profile_detail_scroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingEnd="@dimen/control_manager_text_gap"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/profile_action_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_view">
+
+                <TextView
+                    android:id="@+id/profile_detail_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:maxWidth="@dimen/control_manager_selected_name_max_width"
+                    android:text="@string/controls_no_profile_selected"
+                    android:textColor="@color/launcher_text_primary"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_detail_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/control_manager_text_gap"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:includeFontPadding="true"
+                    android:lineSpacingExtra="1dp"
+                    android:maxLines="1"
+                    android:text="@string/controls_tip_set_default"
+                    android:textColor="@color/launcher_text_secondary"
+                    android:textSize="@dimen/_8ssp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/control_search_height"
+            android:layout_marginTop="@dimen/control_manager_content_gap"
+            android:autofillHints="name"
+            android:background="@drawable/control_search_field"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="@dimen/control_manager_text_gap"
+            android:drawableTint="@color/launcher_text_secondary"
+            android:hint="@string/generic_search"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="@dimen/control_manager_control_padding"
+            android:paddingEnd="@dimen/control_manager_control_padding"
+            android:saveEnabled="true"
+            android:singleLine="true"
+            android:textColor="@color/launcher_text_primary"
+            android:textColorHint="@color/launcher_text_secondary"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_info_toolbar" />
+
+        <TextView
+            android:id="@+id/search_result_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:includeFontPadding="true"
+            android:textColor="@color/launcher_text_secondary"
+            android:textSize="@dimen/_8ssp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_edit_text"
+            tools:text="1 search result"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/control_manager_content_gap"
+            android:clipToPadding="false"
+            android:contentDescription="@string/custom_control_title"
+            android:overScrollMode="ifContentScrolls"
+            android:paddingTop="@dimen/control_manager_list_vertical_padding"
+            android:paddingBottom="@dimen/control_manager_list_vertical_padding"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toTopOf="@id/operate_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_result_count" />
+
+        <TextView
+            android:id="@+id/nothing_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:padding="14dp"
+            android:text="@string/controls_nothing"
+            android:textColor="@color/launcher_text_secondary"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_view"
+            app:layout_constraintEnd_toEndOf="@id/recycler_view"
+            app:layout_constraintStart_toStartOf="@id/recycler_view"
+            app:layout_constraintTop_toTopOf="@id/recycler_view" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/operate_layout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/control_manager_bottom_action_height"
+            android:layout_marginTop="@dimen/control_manager_content_gap"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+                android:id="@+id/create_profile_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/control_manager_action_half_gap"
+                android:background="@drawable/control_manager_surface"
+                android:clickable="true"
+                android:contentDescription="@string/controls_create_new"
+                android:focusable="true"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toStartOf="@id/edit_profile_button"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:ripple_for_constraint="true">
+
+                <ImageView
+                    android:id="@+id/create_profile_icon"
+                    android:layout_width="@dimen/control_manager_bottom_icon_size"
+                    android:layout_height="@dimen/control_manager_bottom_icon_size"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_add"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/create_profile_text"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/launcher_text_primary" />
+
+                <TextView
+                    android:id="@+id/create_profile_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/control_manager_text_gap"
+                    android:ellipsize="end"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:text="@string/controls_create_new"
+                    android:textColor="@color/launcher_text_primary"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/create_profile_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+            <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+                android:id="@+id/edit_profile_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/control_manager_action_half_gap"
+                android:layout_marginEnd="@dimen/control_manager_action_half_gap"
+                android:background="@drawable/control_manager_surface"
+                android:clickable="true"
+                android:contentDescription="@string/generic_edit"
+                android:focusable="true"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toStartOf="@id/return_profile_button"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/create_profile_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:ripple_for_constraint="true">
+
+                <ImageView
+                    android:id="@+id/edit_profile_icon"
+                    android:layout_width="@dimen/control_manager_bottom_icon_size"
+                    android:layout_height="@dimen/control_manager_bottom_icon_size"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_edit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/edit_profile_text"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/launcher_text_primary" />
+
+                <TextView
+                    android:id="@+id/edit_profile_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/control_manager_text_gap"
+                    android:ellipsize="end"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:text="@string/generic_edit"
+                    android:textColor="@color/launcher_text_primary"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/edit_profile_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+            <com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout
+                android:id="@+id/return_profile_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/control_manager_action_half_gap"
+                android:background="@drawable/control_manager_surface"
+                android:clickable="true"
+                android:contentDescription="@string/generic_return"
+                android:focusable="true"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/edit_profile_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:ripple_for_constraint="true">
+
+                <ImageView
+                    android:id="@+id/return_profile_icon"
+                    android:layout_width="@dimen/control_manager_bottom_icon_size"
+                    android:layout_height="@dimen/control_manager_bottom_icon_size"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/return_profile_text"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/launcher_text_primary" />
+
+                <TextView
+                    android:id="@+id/return_profile_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/control_manager_text_gap"
+                    android:ellipsize="end"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:text="@string/generic_return"
+                    android:textColor="@color/launcher_text_primary"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/return_profile_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.movtery.angkorlauncher.ui.layout.AnimConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

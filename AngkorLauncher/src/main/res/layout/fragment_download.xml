@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/download_nav_start_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/download_nav_end_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.49" />
+
+    <!-- The current resource pages keep their original ViewPager and callbacks. -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/download_viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Compact bottom-left Liquid Glass category dock. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/classify_layout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/download_nav_dock_height"
+        android:layout_marginBottom="@dimen/download_nav_margin_bottom"
+        android:background="@drawable/download_nav_dock"
+        android:elevation="10dp"
+        android:padding="@dimen/download_nav_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/download_nav_end_guide"
+        app:layout_constraintStart_toStartOf="@id/download_nav_start_guide">
+
+        <com.angcyo.tablayout.DslTabLayout
+            android:id="@+id/classify_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tab_draw_indicator="false">
+
+            <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/download_nav_item"
+                android:focusable="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/mod_image"
+                    android:layout_width="@dimen/download_nav_icon_size"
+                    android:layout_height="@dimen/download_nav_icon_size"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/download_classify_mod"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_setting"
+                    app:tint="@color/download_text_primary" />
+            </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
+
+            <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/download_nav_item"
+                android:focusable="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/modpack_image"
+                    android:layout_width="@dimen/download_nav_icon_size"
+                    android:layout_height="@dimen/download_nav_icon_size"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/download_classify_modpack"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_folder"
+                    app:tint="@color/download_text_primary" />
+            </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
+
+            <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/download_nav_item"
+                android:focusable="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/resource_pack_image"
+                    android:layout_width="@dimen/download_nav_icon_size"
+                    android:layout_height="@dimen/download_nav_icon_size"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/download_classify_resource_pack"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/download_nav_puzzle"
+                    app:tint="@color/download_text_primary" />
+            </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
+
+            <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/download_nav_item"
+                android:focusable="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/world_image"
+                    android:layout_width="@dimen/download_nav_icon_size"
+                    android:layout_height="@dimen/download_nav_icon_size"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/download_classify_world"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_profile_saves"
+                    app:tint="@color/download_text_primary" />
+            </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
+
+            <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/download_nav_item"
+                android:focusable="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/shader_pack_image"
+                    android:layout_width="@dimen/download_nav_icon_size"
+                    android:layout_height="@dimen/download_nav_icon_size"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/download_classify_shader_pack"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_profile_shader_pack"
+                    app:tint="@color/download_text_primary" />
+            </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
+
+        </com.angcyo.tablayout.DslTabLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

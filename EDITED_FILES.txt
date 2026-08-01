@@ -1,0 +1,50 @@
+Full project rename update:
+
+Android module: AngkorLauncher
+Application/package ID: com.movtery.angkorlauncher
+App name: Angkor Launcher
+Build environment variable: ANGKOR_BUILD_TYPE
+
+Updated the Android module folder, package source folder, package/import declarations, Manifest component names, Gradle paths, JNI class references, workflow paths, documentation, runtime identifiers, and every remaining old-brand occurrence. Build command is now :AngkorLauncher:assembleDebug.
+
+Dashboard frame cleanup (includes AngkorLauncher-clean-first-install-ready-v17):
+
+AngkorLauncher/src/main/res/layout/fragment_launcher.xml
+
+Removed the large outer glass frame around the main workspace, kept only lightweight floating cards for version/action controls, removed account-area fill, added a clearer launch button treatment, and preserved all existing binding IDs and click behavior.
+
+Clean launcher workspace update:
+
+AngkorLauncher/src/main/res/layout/fragment_launcher.xml
+AngkorLauncher/src/main/res/drawable/launcher_primary_panel.xml
+AngkorLauncher/src/main/res/drawable/launcher_play_button.xml
+AngkorLauncher/src/main/res/drawable/launcher_version_card.xml
+AngkorLauncher/src/main/res/drawable/launcher_logo_halo.xml
+AngkorLauncher/src/main/res/drawable/launcher_account_halo.xml
+AngkorLauncher/src/main/res/values/colors.xml
+AngkorLauncher/src/main/res/values-night/colors_night.xml
+
+Centered the left workspace inside one compact glass card, placed the original Angkor logo and account side by side, tightened the version row, and made the launch action clearer. The background, Khmer strings, right utility menu, IDs, and existing click behavior are unchanged.
+
+First-run installation progress update:
+
+AngkorLauncher/src/main/res/layout/activity_splash.xml
+AngkorLauncher/src/main/res/drawable/splash_install_progress.xml
+AngkorLauncher/src/main/res/values/strings.xml
+AngkorLauncher/src/main/res/values-km/strings.xml
+AngkorLauncher/src/main/java/com/movtery/angkorlauncher/ui/activity/SplashActivity.kt
+AngkorLauncher/src/main/java/com/movtery/angkorlauncher/ui/activity/InstallableAdapter.kt
+AngkorLauncher/src/main/java/com/movtery/angkorlauncher/ui/activity/InstallableItem.kt
+AngkorLauncher/src/main/java/com/movtery/angkorlauncher/feature/unpack/OnTaskRunningListener.kt
+AngkorLauncher/src/main/java/com/movtery/angkorlauncher/feature/unpack/UnpackComponentsTask.kt
+AngkorLauncher/src/main/java/com/movtery/angkorlauncher/feature/unpack/UnpackJreTask.kt
+
+After Agree and Install is pressed, the button now transitions into a download-style animation, smoothly animated progress bar, live percentage, completed-component count, and a continuously updating estimated remaining time. Progress is driven by real component-copy and JRE stream-read work rather than a decorative timer.
+
+About-page privacy cleanup:
+
+AngkorLauncher/src/main/res/layout/fragment_about_info_page.xml
+AngkorLauncher/src/main/java/com/movtery/angkorlauncher/ui/fragment/AboutFragment.kt
+AngkorLauncher/src/main/java/com/movtery/angkorlauncher/ui/fragment/about/AboutInfoPageFragment.kt
+
+Removed the Contributors and Acknowledgements card, all contributor names, the sponsor-list button, the sponsor-list page route, and sponsor-list loading from the visible About flow. The app description, version details, source link, and GPL license link remain available.

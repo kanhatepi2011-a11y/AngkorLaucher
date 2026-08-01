@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Padding -->
+    <dimen name="padding_small">@dimen/_2sdp</dimen>
+    <dimen name="padding_medium">@dimen/_4sdp</dimen>
+    <dimen name="padding_moderate">@dimen/_6sdp</dimen>
+    <dimen name="padding_heavy">@dimen/_12sdp</dimen>
+    <dimen name="padding_large">@dimen/_16sdp</dimen>
+    <dimen name="padding_extra_large">@dimen/_24sdp</dimen>
+    <!-- Input text padding -->
+    <dimen name="padding_input_bottom">@dimen/padding_heavy</dimen>
+    <dimen name="padding_input_top">@dimen/_11sdp</dimen>
+    <!--  Dialog min width  -->
+    <dimen name="dialog_min_width">@dimen/_480sdp</dimen>
+
+    <!-- Landscape launcher workspace -->
+    <dimen name="launcher_top_bar_height">@dimen/_48sdp</dimen>
+    <dimen name="launcher_safe_edge">@dimen/_12sdp</dimen>
+    <dimen name="launcher_panel_radius">@dimen/_24sdp</dimen>
+    <dimen name="launcher_panel_stroke">@dimen/_1sdp</dimen>
+    <dimen name="launcher_utility_width">@dimen/_62sdp</dimen>
+    <dimen name="launcher_utility_target">@dimen/_48sdp</dimen>
+    <dimen name="launcher_utility_icon">@dimen/_26sdp</dimen>
+    <dimen name="launcher_dock_height">@dimen/_92sdp</dimen>
+    <dimen name="launcher_dock_max_width">720dp</dimen>
+    <dimen name="launcher_dock_padding">@dimen/_8sdp</dimen>
+    <dimen name="launcher_dock_gap">@dimen/_8sdp</dimen>
+    <dimen name="launcher_avatar_size">@dimen/_52sdp</dimen>
+    <dimen name="launcher_play_radius">@dimen/_18sdp</dimen>
+    <dimen name="launcher_tooltip_radius">@dimen/_12sdp</dimen>
+
+    <!-- Responsive Controller Profiles screen (small landscape phones first). -->
+    <dimen name="control_panel_padding">8dp</dimen>
+    <dimen name="control_panel_radius">24dp</dimen>
+    <dimen name="control_inner_radius">18dp</dimen>
+    <dimen name="control_detail_icon_size">64dp</dimen>
+    <dimen name="control_detail_icon_inner">40dp</dimen>
+    <dimen name="control_action_size">48dp</dimen>
+    <dimen name="control_action_icon_size">24dp</dimen>
+    <dimen name="control_profile_row_min_height">64dp</dimen>
+    <dimen name="control_profile_icon_box">42dp</dimen>
+    <dimen name="control_profile_icon_size">24dp</dimen>
+    <dimen name="control_profile_icon_padding">9dp</dimen>
+    <dimen name="control_search_height">48dp</dimen>
+    <dimen name="control_edit_height">48dp</dimen>
+    <dimen name="control_manager_outer_vertical_margin">4dp</dimen>
+    <dimen name="control_manager_outer_horizontal_margin">16dp</dimen>
+    <dimen name="control_manager_top_control_height">52dp</dimen>
+    <dimen name="control_manager_top_gap">6dp</dimen>
+    <dimen name="control_manager_panel_gap">4dp</dimen>
+    <dimen name="control_manager_control_padding">10dp</dimen>
+    <dimen name="control_manager_text_gap">6dp</dimen>
+    <dimen name="control_manager_content_gap">4dp</dimen>
+    <dimen name="control_manager_top_icon_size">24dp</dimen>
+    <dimen name="control_manager_chevron_size">20dp</dimen>
+    <dimen name="control_manager_path_indicator_size">20dp</dimen>
+    <dimen name="control_manager_icon_button_padding">12dp</dimen>
+    <dimen name="control_manager_bottom_action_height">48dp</dimen>
+    <dimen name="control_manager_bottom_icon_size">22dp</dimen>
+    <dimen name="control_manager_action_half_gap">3dp</dimen>
+    <dimen name="control_manager_info_toolbar_height">60dp</dimen>
+    <dimen name="control_manager_info_vertical_padding">4dp</dimen>
+    <dimen name="control_manager_selected_name_max_width">160dp</dimen>
+    <dimen name="control_manager_row_horizontal_padding">10dp</dimen>
+    <dimen name="control_manager_row_vertical_padding">4dp</dimen>
+    <dimen name="control_manager_row_half_gap">3dp</dimen>
+    <dimen name="control_manager_list_vertical_padding">1dp</dimen>
+
+    <!-- Responsive Download / Mod Management workspace. -->
+    <dimen name="download_nav_dock_height">72dp</dimen>
+    <dimen name="download_nav_margin_start">24dp</dimen>
+    <dimen name="download_nav_margin_bottom">20dp</dimen>
+    <dimen name="download_nav_padding">8dp</dimen>
+    <dimen name="download_nav_item_size">56dp</dimen>
+    <dimen name="download_nav_item_gap">4dp</dimen>
+    <dimen name="download_nav_icon_padding">14dp</dimen>
+    <dimen name="download_workspace_edge">12dp</dimen>
+    <dimen name="download_workspace_gap">8dp</dimen>
+    <dimen name="download_results_bottom_clearance">96dp</dimen>
+    <dimen name="download_workspace_card_padding">12dp</dimen>
+    <dimen name="download_workspace_card_gap">10dp</dimen>
+    <dimen name="download_workspace_field_height">48dp</dimen>
+    <dimen name="download_workspace_selector_height">56dp</dimen>
+    <dimen name="download_workspace_action_height">56dp</dimen>
+    <dimen name="download_workspace_action_padding">10dp</dimen>
+    <dimen name="download_filter_chip_width">142dp</dimen>
+    <dimen name="download_workspace_card_radius">24dp</dimen>
+    <dimen name="download_workspace_field_radius">16dp</dimen>
+    <dimen name="download_column_outer_margin">12dp</dimen>
+    <dimen name="download_top_card_height">148dp</dimen>
+    <dimen name="download_selector_row_height">112dp</dimen>
+    <dimen name="download_primary_controls_height">270dp</dimen>
+    <dimen name="download_search_field_height">52dp</dimen>
+    <dimen name="download_top_action_size">48dp</dimen>
+    <dimen name="download_search_progress_size">28dp</dimen>
+    <dimen name="download_result_icon_size">64dp</dimen>
+    <dimen name="download_result_card_padding">12dp</dimen>
+    <dimen name="download_nav_icon_size">30dp</dimen>
+
+    <!-- Responsive Renderer / Launcher Configuration screen. -->
+    <dimen name="settings_toolbar_width">68dp</dimen>
+    <dimen name="settings_toolbar_height">308dp</dimen>
+    <dimen name="settings_toolbar_margin_end">8dp</dimen>
+    <dimen name="settings_toolbar_padding">6dp</dimen>
+    <dimen name="settings_toolbar_item_size">56dp</dimen>
+    <dimen name="settings_toolbar_item_gap">4dp</dimen>
+    <dimen name="settings_toolbar_icon_padding">11dp</dimen>
+    <dimen name="settings_toolbar_icon_size">26dp</dimen>
+    <dimen name="settings_tooltip_top_offset">6dp</dimen>
+    <dimen name="settings_tooltip_height">48dp</dimen>
+    <dimen name="settings_tooltip_max_width">160dp</dimen>
+    <dimen name="settings_tooltip_horizontal_padding">12dp</dimen>
+    <dimen name="settings_section_gap">12dp</dimen>
+    <dimen name="settings_section_half_gap">6dp</dimen>
+    <dimen name="renderer_panel_margin_start">16dp</dimen>
+    <dimen name="renderer_panel_margin_top">8dp</dimen>
+    <dimen name="renderer_panel_margin_end">8dp</dimen>
+    <dimen name="renderer_panel_margin_bottom">16dp</dimen>
+    <dimen name="renderer_info_panel_margin_end">0dp</dimen>
+    <dimen name="renderer_info_tooltip_inset">58dp</dimen>
+    <dimen name="renderer_panel_padding">12dp</dimen>
+    <dimen name="renderer_panel_gap">14dp</dimen>
+    <dimen name="renderer_panel_radius">26dp</dimen>
+    <dimen name="renderer_header_height">48dp</dimen>
+    <dimen name="renderer_card_radius">20dp</dimen>
+    <dimen name="renderer_card_gap">12dp</dimen>
+    <dimen name="renderer_card_padding">12dp</dimen>
+    <dimen name="renderer_card_min_height">84dp</dimen>
+    <dimen name="renderer_plugin_card_min_height">116dp</dimen>
+    <dimen name="renderer_icon_box_size">52dp</dimen>
+    <dimen name="renderer_action_size">52dp</dimen>
+    <dimen name="renderer_text_gap">12dp</dimen>
+    <dimen name="renderer_secondary_min_height">82dp</dimen>
+    <dimen name="renderer_secondary_padding">10dp</dimen>
+    <dimen name="renderer_secondary_gap">8dp</dimen>
+
+    <!-- One-column responsive Settings pages. -->
+    <dimen name="settings_page_margin_horizontal">12dp</dimen>
+    <dimen name="settings_page_padding_vertical">10dp</dimen>
+    <dimen name="settings_page_section_gap">12dp</dimen>
+    <dimen name="settings_page_section_padding_horizontal">10dp</dimen>
+    <dimen name="settings_page_section_padding_vertical">12dp</dimen>
+    <dimen name="settings_page_card_gap">8dp</dimen>
+    <dimen name="settings_page_card_padding">12dp</dimen>
+    <dimen name="settings_page_card_min_height">72dp</dimen>
+    <dimen name="settings_page_field_min_height">48dp</dimen>
+</resources>

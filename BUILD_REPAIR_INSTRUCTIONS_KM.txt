@@ -1,0 +1,11 @@
+ANGKOR LAUNCHER BUILD REPAIR
+
+1. Extract this ZIP into the root of AngkorLauncher-main.
+2. Choose Replace/Overwrite for all files.
+3. Keep the Android module folder named AngkorLauncher.
+4. In PowerShell at the project root, run:
+
+   .\gradlew.bat --stop
+   .\gradlew.bat :AngkorLauncher:assembleDebug --no-configuration-cache
+
+The visible application name remains Angkor Launcher. The Gradle root project name is AngkorLauncher, while the Android module path remains :AngkorLauncher.
