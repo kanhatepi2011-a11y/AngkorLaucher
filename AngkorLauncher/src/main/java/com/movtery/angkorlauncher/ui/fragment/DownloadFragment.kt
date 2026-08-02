@@ -1,6 +1,7 @@
 package com.movtery.angkorlauncher.ui.fragment
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +27,13 @@ import org.greenrobot.eventbus.EventBus
 class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
     companion object {
         const val TAG = "DownloadFragment"
+        private const val STATE_SELECTED_PAGE = "download_selected_page"
+        private const val NAVIGATION_DEBOUNCE_MS = 320L
     }
 
     private lateinit var binding: FragmentDownloadBinding
+    private var lastNavigationTarget = -1
+    private var lastNavigationTapUptime = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,12 +45,10 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initViewPager()
-
-        binding.classifyTab.observeIndexChange { _, toIndex, reselect, fromUser ->
-            if (reselect) return@observeIndexChange
-            if (fromUser) binding.downloadViewpager.setCurrentItem(toIndex, false)
-        }
+        val initialPage = savedInstanceState?.getInt(STATE_SELECTED_PAGE, 0) ?: 0
+        setupCategoryDock()
+        initViewPager(initialPage)
+        onFragmentSelect(initialPage)
 
         ZHTools.setTooltipText(
             binding.modImage,
@@ -56,7 +59,57 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
         )
     }
 
-    private fun initViewPager() {
+    /**
+     * Each complete tile owns exactly one click listener. The icon children are decorative,
+     * so taps on their centers and edges follow the same authoritative navigation path.
+     */
+    private fun setupCategoryDock() {
+        categoryIcons().forEach { icon ->
+            icon.isClickable = false
+            icon.isFocusable = false
+        }
+
+        categoryItems().forEachIndexed { index, item ->
+            item.isClickable = true
+            item.isFocusable = true
+            item.setOnClickListener { navigateToCategory(index) }
+        }
+    }
+
+    private fun navigateToCategory(targetPage: Int) {
+        val safeTarget = targetPage.coerceIn(0, categoryItems().lastIndex)
+        if (safeTarget == binding.downloadViewpager.currentItem) return
+
+        val now = SystemClock.elapsedRealtime()
+        if (safeTarget == lastNavigationTarget &&
+            now - lastNavigationTapUptime < NAVIGATION_DEBOUNCE_MS
+        ) {
+            return
+        }
+
+        lastNavigationTarget = safeTarget
+        lastNavigationTapUptime = now
+        onFragmentSelect(safeTarget)
+        binding.downloadViewpager.setCurrentItem(safeTarget, false)
+    }
+
+    private fun categoryItems(): List<View> = listOf(
+        binding.modTab,
+        binding.modpackTab,
+        binding.resourcePackTab,
+        binding.worldTab,
+        binding.shaderPackTab
+    )
+
+    private fun categoryIcons(): List<View> = listOf(
+        binding.modImage,
+        binding.modpackImage,
+        binding.resourcePackImage,
+        binding.worldImage,
+        binding.shaderPackImage
+    )
+
+    private fun initViewPager(initialPage: Int) {
         binding.downloadViewpager.apply {
             adapter = ViewPagerAdapter(this@DownloadFragment)
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -69,11 +122,23 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
                     EventBus.getDefault().post(DownloadPageEvent.PageSwapEvent(position, IN))
                 }
             })
+            setCurrentItem(initialPage.coerceIn(0, 4), false)
         }
     }
 
     private fun onFragmentSelect(position: Int) {
-        binding.classifyTab.onPageSelected(position)
+        val safePosition = position.coerceIn(0, categoryItems().lastIndex)
+        categoryItems().forEachIndexed { index, item ->
+            item.isSelected = index == safePosition
+        }
+        binding.classifyTab.onPageSelected(safePosition)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (::binding.isInitialized) {
+            outState.putInt(STATE_SELECTED_PAGE, binding.downloadViewpager.currentItem)
+        }
+        super.onSaveInstanceState(outState)
     }
 
     override fun slideIn(animPlayer: AnimPlayer) {

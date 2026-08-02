@@ -14,13 +14,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.07" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/download_nav_end_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.49" />
-
     <!-- The current resource pages keep their original ViewPager and callbacks. -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/download_viewpager"
@@ -34,23 +27,24 @@
     <!-- Compact bottom-left Liquid Glass category dock. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/classify_layout"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/download_nav_dock_height"
         android:layout_marginBottom="@dimen/download_nav_margin_bottom"
         android:background="@drawable/download_nav_dock"
+        android:clipChildren="true"
+        android:clipToPadding="true"
         android:elevation="10dp"
         android:padding="@dimen/download_nav_padding"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/download_nav_end_guide"
         app:layout_constraintStart_toStartOf="@id/download_nav_start_guide">
 
         <com.angcyo.tablayout.DslTabLayout
             android:id="@+id/classify_tab"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:clipChildren="false"
-            android:clipToPadding="false"
+            android:clipChildren="true"
+            android:clipToPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,95 +52,144 @@
             app:tab_draw_indicator="false">
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:id="@+id/mod_tab"
+                android:layout_width="@dimen/download_nav_item_size"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@drawable/download_nav_item"
+                android:clickable="true"
+                android:contentDescription="@string/download_classify_mod"
+                android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
-                android:gravity="center">
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                app:ripple_for_relative="true">
 
                 <ImageView
                     android:id="@+id/mod_image"
                     android:layout_width="@dimen/download_nav_icon_size"
                     android:layout_height="@dimen/download_nav_icon_size"
                     android:layout_centerInParent="true"
+                    android:clickable="false"
                     android:contentDescription="@string/download_classify_mod"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_setting"
                     app:tint="@color/download_text_primary" />
             </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:id="@+id/modpack_tab"
+                android:layout_width="@dimen/download_nav_item_size"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_marginStart="@dimen/download_nav_item_gap"
                 android:background="@drawable/download_nav_item"
+                android:clickable="true"
+                android:contentDescription="@string/download_classify_modpack"
+                android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
-                android:gravity="center">
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                app:ripple_for_relative="true">
 
                 <ImageView
                     android:id="@+id/modpack_image"
                     android:layout_width="@dimen/download_nav_icon_size"
                     android:layout_height="@dimen/download_nav_icon_size"
                     android:layout_centerInParent="true"
+                    android:clickable="false"
                     android:contentDescription="@string/download_classify_modpack"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_folder"
                     app:tint="@color/download_text_primary" />
             </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:id="@+id/resource_pack_tab"
+                android:layout_width="@dimen/download_nav_item_size"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_marginStart="@dimen/download_nav_item_gap"
                 android:background="@drawable/download_nav_item"
+                android:clickable="true"
+                android:contentDescription="@string/download_classify_resource_pack"
+                android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
-                android:gravity="center">
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                app:ripple_for_relative="true">
 
                 <ImageView
                     android:id="@+id/resource_pack_image"
                     android:layout_width="@dimen/download_nav_icon_size"
                     android:layout_height="@dimen/download_nav_icon_size"
                     android:layout_centerInParent="true"
+                    android:clickable="false"
                     android:contentDescription="@string/download_classify_resource_pack"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/download_nav_puzzle"
                     app:tint="@color/download_text_primary" />
             </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:id="@+id/world_tab"
+                android:layout_width="@dimen/download_nav_item_size"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_marginStart="@dimen/download_nav_item_gap"
                 android:background="@drawable/download_nav_item"
+                android:clickable="true"
+                android:contentDescription="@string/download_classify_world"
+                android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
-                android:gravity="center">
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                app:ripple_for_relative="true">
 
                 <ImageView
                     android:id="@+id/world_image"
                     android:layout_width="@dimen/download_nav_icon_size"
                     android:layout_height="@dimen/download_nav_icon_size"
                     android:layout_centerInParent="true"
+                    android:clickable="false"
                     android:contentDescription="@string/download_classify_world"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_profile_saves"
                     app:tint="@color/download_text_primary" />
             </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:id="@+id/shader_pack_tab"
+                android:layout_width="@dimen/download_nav_item_size"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_marginStart="@dimen/download_nav_item_gap"
                 android:background="@drawable/download_nav_item"
+                android:clickable="true"
+                android:contentDescription="@string/download_classify_shader_pack"
+                android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
-                android:gravity="center">
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                app:ripple_for_relative="true">
 
                 <ImageView
                     android:id="@+id/shader_pack_image"
                     android:layout_width="@dimen/download_nav_icon_size"
                     android:layout_height="@dimen/download_nav_icon_size"
                     android:layout_centerInParent="true"
+                    android:clickable="false"
                     android:contentDescription="@string/download_classify_shader_pack"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_profile_shader_pack"
                     app:tint="@color/download_text_primary" />

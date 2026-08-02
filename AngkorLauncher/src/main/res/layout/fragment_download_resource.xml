@@ -349,16 +349,28 @@
                             android:layout_height="@dimen/download_workspace_selector_height"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/download_workspace_field"
+                            android:clickable="true"
                             android:ellipsize="end"
+                            android:foreground="?attr/selectableItemBackground"
                             android:focusable="true"
                             android:gravity="center_vertical"
                             android:minHeight="48dp"
                             android:paddingHorizontal="14dp"
                             android:textColor="@color/download_text_primary"
                             android:textSize="@dimen/_11ssp"
+                            app:spinner_arrow_gravity="end"
+                            app:spinner_arrow_padding="8dp"
                             app:spinner_arrow_tint="@color/download_text_primary"
+                            app:spinner_debounce_duration="320"
+                            app:spinner_divider_color="@color/download_panel_border"
+                            app:spinner_divider_show="true"
+                            app:spinner_divider_size="1dp"
+                            app:spinner_item_height="48dp"
+                            app:spinner_popup_animation="dropdown"
                             app:spinner_popup_background="@drawable/download_workspace_card"
-                            app:spinner_popup_height="120dp" />
+                            app:spinner_popup_elevation="12dp"
+                            app:spinner_popup_height="97dp"
+                            app:spinner_selected_item_background="@drawable/download_spinner_selected_item" />
 
                     </LinearLayout>
                 </LinearLayout>

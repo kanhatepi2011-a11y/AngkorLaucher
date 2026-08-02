@@ -36,20 +36,20 @@
     <dimen name="control_manager_row_half_gap">4dp</dimen>
     <dimen name="control_manager_list_vertical_padding">2dp</dimen>
 
-    <dimen name="download_nav_dock_height">136dp</dimen>
+    <dimen name="download_nav_dock_height">88dp</dimen>
     <dimen name="download_nav_margin_start">36dp</dimen>
     <dimen name="download_nav_margin_bottom">28dp</dimen>
-    <dimen name="download_nav_padding">8dp</dimen>
+    <dimen name="download_nav_padding">12dp</dimen>
     <dimen name="download_nav_item_size">64dp</dimen>
-    <dimen name="download_nav_item_gap">6dp</dimen>
+    <dimen name="download_nav_item_gap">10dp</dimen>
     <dimen name="download_nav_icon_padding">16dp</dimen>
     <dimen name="download_workspace_edge">24dp</dimen>
     <dimen name="download_workspace_gap">12dp</dimen>
-    <dimen name="download_results_bottom_clearance">182dp</dimen>
+    <dimen name="download_results_bottom_clearance">124dp</dimen>
     <dimen name="download_workspace_card_padding">18dp</dimen>
     <dimen name="download_workspace_card_gap">18dp</dimen>
     <dimen name="download_workspace_field_height">56dp</dimen>
-    <dimen name="download_workspace_selector_height">108dp</dimen>
+    <dimen name="download_workspace_selector_height">64dp</dimen>
     <dimen name="download_workspace_action_height">64dp</dimen>
     <dimen name="download_workspace_action_padding">12dp</dimen>
     <dimen name="download_filter_chip_width">156dp</dimen>
@@ -57,14 +57,14 @@
     <dimen name="download_workspace_field_radius">18dp</dimen>
     <dimen name="download_column_outer_margin">36dp</dimen>
     <dimen name="download_top_card_height">220dp</dimen>
-    <dimen name="download_selector_row_height">220dp</dimen>
+    <dimen name="download_selector_row_height">128dp</dimen>
     <dimen name="download_primary_controls_height">458dp</dimen>
     <dimen name="download_search_field_height">80dp</dimen>
     <dimen name="download_top_action_size">72dp</dimen>
     <dimen name="download_search_progress_size">36dp</dimen>
     <dimen name="download_result_icon_size">112dp</dimen>
     <dimen name="download_result_card_padding">18dp</dimen>
-    <dimen name="download_nav_icon_size">44dp</dimen>
+    <dimen name="download_nav_icon_size">30dp</dimen>
 
     <dimen name="settings_toolbar_width">88dp</dimen>
     <dimen name="settings_toolbar_height">388dp</dimen>

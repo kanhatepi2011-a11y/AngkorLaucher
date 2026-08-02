@@ -179,7 +179,12 @@ abstract class AbstractResourceDownloadFragment(
                 View.GONE
             }
 
-            initSpinnerIndex()
+            val restoredPlatform = savedInstanceState
+                ?.getInt(STATE_PLATFORM_INDEX, recommendedPlatform.ordinal)
+                ?.coerceIn(Platform.entries.indices)
+                ?.let(Platform.entries::get)
+                ?: recommendedPlatform
+            initSpinnerIndex(restoredPlatform)
 
             reset.setOnClickListener {
                 if (!allowAction()) return@setOnClickListener
@@ -202,7 +207,21 @@ abstract class AbstractResourceDownloadFragment(
             setSpinnerAdapter(adapter)
             setIsFocusable(true)
             lifecycleOwner = this@AbstractResourceDownloadFragment
+            setOnClickListener {
+                closeSpinnersExcept(this)
+                showOrDismiss()
+            }
         }
+    }
+
+    private fun closeSpinnersExcept(activeSpinner: PowerSpinnerView) {
+        listOf(
+            binding.platformSpinner,
+            binding.sortSpinner,
+            binding.categorySpinner,
+            binding.modloaderSpinner
+        ).filterNot { it === activeSpinner }
+            .forEach { it.dismiss() }
     }
 
     private fun applyResponsiveConstraints() {
@@ -228,14 +247,19 @@ abstract class AbstractResourceDownloadFragment(
         }
     }
 
-    private fun initSpinnerIndex() {
+    private fun initSpinnerIndex(platform: Platform = recommendedPlatform) {
         binding.apply {
-            mCurrentPlatform = recommendedPlatform
-            platformSpinner.selectItemByIndex(recommendedPlatform.ordinal)
+            mCurrentPlatform = platform
+            platformSpinner.selectItemByIndex(platform.ordinal)
             sortSpinner.selectItemByIndex(0)
             categorySpinner.selectItemByIndex(0)
             if (showModloader) modloaderSpinner.selectItemByIndex(0)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(STATE_PLATFORM_INDEX, mCurrentPlatform.ordinal)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onStart() {
@@ -448,7 +472,8 @@ abstract class AbstractResourceDownloadFragment(
 
     companion object {
         private val MOD_ITEMS_EMPTY: MutableList<InfoItem> = ArrayList()
-        private const val ACTION_DEBOUNCE_MS = 500L
+        private const val STATE_PLATFORM_INDEX = "download_platform_index"
+        private const val ACTION_DEBOUNCE_MS = 320L
 
         const val ERROR_INTERNAL: Int = 0
         const val ERROR_NO_RESULTS: Int = 1
