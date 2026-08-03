@@ -158,19 +158,28 @@ public final class Tools {
     }
 
     public static String getLWJGL3ClassPath() {
-        StringBuilder libStr = new StringBuilder();
-        File lwjgl3Folder = new File(PathManager.DIR_GAME_HOME, "lwjgl3");
-        File[] lwjgl3Files = lwjgl3Folder.listFiles();
-        if (lwjgl3Files != null) {
-            for (File file: lwjgl3Files) {
-                if (file.getName().endsWith(".jar")) {
-                    libStr.append(file.getAbsolutePath()).append(":");
-                }
-            }
+        File lwjgl3Folder = null;
+        try {
+            lwjgl3Folder = LWJGLClasspath.resolveDirectory(PathManager.DIR_GAME_HOME);
+            Logging.i("LWJGL Classpath", "Expected directory: " + lwjgl3Folder.getAbsolutePath()
+                    + ", exists=" + lwjgl3Folder.exists()
+                    + ", directory=" + lwjgl3Folder.isDirectory()
+                    + ", readable=" + lwjgl3Folder.canRead());
+
+            File[] lwjgl3Files = LWJGLClasspath.findReadableJarFiles(lwjgl3Folder);
+            Logging.i("LWJGL Classpath", "Discovered readable JAR files: " + lwjgl3Files.length);
+            return LWJGLClasspath.join(lwjgl3Files);
+        } catch (LWJGLRuntimeException exception) {
+            Logging.e("LWJGL Classpath", "Expected directory: "
+                    + (lwjgl3Folder == null ? "unresolved" : lwjgl3Folder.getAbsolutePath())
+                    + ". Discovered readable JAR files: 0. "
+                    + exception.getMessage(), exception);
+            throw exception;
         }
-        // Remove the ':' at the end
-        libStr.setLength(libStr.length() - 1);
-        return libStr.toString();
+    }
+
+    public static String getLWJGL3ClassPath(File lwjgl3Folder) {
+        return LWJGLClasspath.join(LWJGLClasspath.findReadableJarFiles(lwjgl3Folder));
     }
 
     public static String generateLaunchClassPath(JMinecraftVersionList.Version info, Version minecraftVersion) {

@@ -27,7 +27,7 @@
     <!-- Compact bottom-left Liquid Glass category dock. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/classify_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/download_nav_dock_width"
         android:layout_height="@dimen/download_nav_dock_height"
         android:layout_marginBottom="@dimen/download_nav_margin_bottom"
         android:background="@drawable/download_nav_dock"
@@ -38,23 +38,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/download_nav_start_guide">
 
-        <com.angcyo.tablayout.DslTabLayout
+        <LinearLayout
             android:id="@+id/classify_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:clipChildren="true"
             android:clipToPadding="true"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tab_draw_indicator="false">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/mod_tab"
-                android:layout_width="@dimen/download_nav_item_size"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="@drawable/download_nav_item"
                 android:clickable="true"
                 android:contentDescription="@string/download_classify_mod"
@@ -73,6 +74,7 @@
                     android:clickable="false"
                     android:contentDescription="@string/download_classify_mod"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_setting"
@@ -81,8 +83,9 @@
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/modpack_tab"
-                android:layout_width="@dimen/download_nav_item_size"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="@dimen/download_nav_item_gap"
                 android:background="@drawable/download_nav_item"
                 android:clickable="true"
@@ -102,6 +105,7 @@
                     android:clickable="false"
                     android:contentDescription="@string/download_classify_modpack"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_folder"
@@ -110,8 +114,9 @@
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/resource_pack_tab"
-                android:layout_width="@dimen/download_nav_item_size"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="@dimen/download_nav_item_gap"
                 android:background="@drawable/download_nav_item"
                 android:clickable="true"
@@ -131,6 +136,7 @@
                     android:clickable="false"
                     android:contentDescription="@string/download_classify_resource_pack"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/download_nav_puzzle"
@@ -139,8 +145,9 @@
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/world_tab"
-                android:layout_width="@dimen/download_nav_item_size"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="@dimen/download_nav_item_gap"
                 android:background="@drawable/download_nav_item"
                 android:clickable="true"
@@ -160,6 +167,7 @@
                     android:clickable="false"
                     android:contentDescription="@string/download_classify_world"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_profile_saves"
@@ -168,8 +176,9 @@
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/shader_pack_tab"
-                android:layout_width="@dimen/download_nav_item_size"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="@dimen/download_nav_item_gap"
                 android:background="@drawable/download_nav_item"
                 android:clickable="true"
@@ -189,13 +198,14 @@
                     android:clickable="false"
                     android:contentDescription="@string/download_classify_shader_pack"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_profile_shader_pack"
                     app:tint="@color/download_text_primary" />
             </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
 
-        </com.angcyo.tablayout.DslTabLayout>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

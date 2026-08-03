@@ -1,7 +1,6 @@
 package com.movtery.angkorlauncher.ui.fragment
 
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +13,14 @@ import com.movtery.anim.animations.Animations
 import com.movtery.angkorlauncher.R
 import com.movtery.angkorlauncher.databinding.FragmentSettingsBinding
 import com.movtery.angkorlauncher.event.value.SettingsPageSwapEvent
+import com.movtery.angkorlauncher.feature.log.Logging
 import com.movtery.angkorlauncher.setting.Settings
 import com.movtery.angkorlauncher.ui.fragment.settings.ControlSettingsFragment
 import com.movtery.angkorlauncher.ui.fragment.settings.ExperimentalSettingsFragment
 import com.movtery.angkorlauncher.ui.fragment.settings.GameSettingsFragment
 import com.movtery.angkorlauncher.ui.fragment.settings.LauncherSettingsFragment
 import com.movtery.angkorlauncher.ui.fragment.settings.VideoSettingsFragment
+import com.movtery.angkorlauncher.ui.navigation.PageNavigation
 import com.movtery.angkorlauncher.utils.ZHTools
 import org.greenrobot.eventbus.EventBus
 
@@ -27,7 +28,6 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
     companion object {
         const val TAG: String = "SettingsFragment"
         private const val STATE_SELECTED_PAGE = "settings_selected_page"
-        private const val NAVIGATION_DEBOUNCE_MS = 320L
         private val CATEGORY_LABELS = intArrayOf(
             R.string.setting_category_video,
             R.string.setting_category_control,
@@ -38,9 +38,6 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
     }
 
     private lateinit var binding: FragmentSettingsBinding
-    private var lastNavigationTarget = -1
-    private var lastNavigationTapUptime = 0L
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,10 +64,7 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
         binding.settingsTooltip.visibility = View.GONE
     }
 
-    /**
-     * DslTabLayout normally installs its own child listeners. Replacing them here gives every
-     * complete rail tile one authoritative click path and keeps the icon itself non-clickable.
-     */
+    /** The complete rail tile owns the only click listener; icons are decorative children. */
     private fun setupNavigationRail() {
         navigationIcons().forEach { icon ->
             icon.isClickable = false
@@ -85,26 +79,24 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
     }
 
     private fun navigateToSettingsPage(targetPage: Int) {
-        val safeTarget = targetPage.coerceIn(0, navigationItems().lastIndex)
+        val items = navigationItems()
         val currentPage = binding.settingsViewpager.currentItem
-        if (safeTarget == currentPage) return
+        val safeTarget = PageNavigation.targetOrNone(currentPage, targetPage, items.size)
+        val shouldNavigate = safeTarget != PageNavigation.NO_DESTINATION
+        val logTarget = if (shouldNavigate) safeTarget else currentPage
+        Logging.i(
+            "NavigationTap",
+            "bar=settings item=${getString(CATEGORY_LABELS[logTarget])} " +
+                "currentPage=$currentPage targetPage=$logTarget " +
+                "selectedBefore=${items[logTarget].isSelected} " +
+                "navigateCalled=$shouldNavigate thread=${Thread.currentThread().name}"
+        )
+        if (!shouldNavigate) return
 
-        val now = SystemClock.elapsedRealtime()
-        if (safeTarget == lastNavigationTarget &&
-            now - lastNavigationTapUptime < NAVIGATION_DEBOUNCE_MS
-        ) {
-            return
-        }
-
-        lastNavigationTarget = safeTarget
-        lastNavigationTapUptime = now
-
-        // Show the selected state immediately; ViewPager remains the source of truth.
         onFragmentSelect(safeTarget)
         try {
             binding.settingsViewpager.setCurrentItem(safeTarget, false)
         } catch (error: RuntimeException) {
-            lastNavigationTarget = -1
             onFragmentSelect(currentPage)
             throw error
         }
@@ -154,7 +146,6 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
         navigationItems().forEachIndexed { index, item ->
             item.isSelected = index == safePosition
         }
-        binding.settingsTab.onPageSelected(safePosition)
     }
 
     private fun updateCategoryTooltip(position: Int, animate: Boolean) {

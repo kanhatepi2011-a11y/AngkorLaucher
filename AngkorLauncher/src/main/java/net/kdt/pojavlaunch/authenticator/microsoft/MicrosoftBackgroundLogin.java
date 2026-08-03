@@ -127,10 +127,10 @@ public class MicrosoftBackgroundLogin {
         Logging.i("MicrosoftLogin", "isRefresh=" + isRefresh);
 
         String formData = convertToFormData(
-                "client_id", "00000000402b5328",
+                "client_id", MicrosoftAuthConfig.CLIENT_ID,
                 isRefresh ? "refresh_token" : "code", authcode,
                 "grant_type", isRefresh ? "refresh_token" : "authorization_code",
-                "redirect_url", "https://login.live.com/oauth20_desktop.srf",
+                "redirect_url", MicrosoftAuthConfig.REDIRECT_URI,
                 "scope", "service::user.auth.xboxlive.com::MBI_SSL"
         );
 

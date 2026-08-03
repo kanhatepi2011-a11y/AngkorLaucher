@@ -3,7 +3,9 @@ package com.movtery.angkorlauncher.feature.unpack
 import android.content.Context
 import android.content.res.AssetManager
 import com.movtery.angkorlauncher.feature.log.Logging.i
+import com.movtery.angkorlauncher.launch.CacioFiles
 import com.movtery.angkorlauncher.utils.path.PathManager
+import net.kdt.pojavlaunch.LWJGLClasspath
 import net.kdt.pojavlaunch.Tools
 import org.apache.commons.io.FileUtils
 import java.io.File
@@ -36,6 +38,14 @@ class UnpackComponentsTask(val context: Context, val component: Components) : Ab
         if (!versionFile.exists()) {
             requestEmptyParentDir(versionFile)
             i("Unpack Components", "${component.component}: Pack was installed manually, or does not exist...")
+            return true
+        } else if (component == Components.LWJGL3 && !LWJGLClasspath.hasMinecraft26LaunchClasses(versionFile.parentFile)) {
+            requestEmptyParentDir(versionFile)
+            i("Unpack Components", "${component.component}: Runtime is incomplete or outdated; reinstalling bundled JAR files...")
+            return true
+        } else if (component == Components.CACIOCAVALLO17 && !CacioFiles.hasModernFiles(versionFile.parentFile)) {
+            requestEmptyParentDir(versionFile)
+            i("Unpack Components", "${component.component}: Caciocavallo is incomplete; reinstalling bundled JAR files...")
             return true
         } else {
             val fis = FileInputStream(versionFile)

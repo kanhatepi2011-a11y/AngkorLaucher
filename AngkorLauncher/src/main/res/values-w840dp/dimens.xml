@@ -37,6 +37,7 @@
     <dimen name="control_manager_list_vertical_padding">2dp</dimen>
 
     <dimen name="download_nav_dock_height">88dp</dimen>
+    <dimen name="download_nav_dock_width">384dp</dimen>
     <dimen name="download_nav_margin_start">36dp</dimen>
     <dimen name="download_nav_margin_bottom">28dp</dimen>
     <dimen name="download_nav_padding">12dp</dimen>

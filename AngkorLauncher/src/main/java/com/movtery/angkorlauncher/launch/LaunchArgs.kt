@@ -1,22 +1,22 @@
 package com.movtery.angkorlauncher.launch
 
-import androidx.collection.ArrayMap
+import com.movtery.angkorlauncher.BuildConfig
 import com.movtery.angkorlauncher.InfoDistributor
 import com.movtery.angkorlauncher.feature.accounts.AccountUtils
 import com.movtery.angkorlauncher.feature.customprofilepath.ProfilePathHome
 import com.movtery.angkorlauncher.feature.customprofilepath.ProfilePathHome.Companion.getLibrariesHome
 import com.movtery.angkorlauncher.feature.version.Version
-import com.movtery.angkorlauncher.utils.ZHTools
 import com.movtery.angkorlauncher.utils.path.LibPath
 import com.movtery.angkorlauncher.utils.path.PathManager
 import net.kdt.pojavlaunch.AWTCanvasView
 import net.kdt.pojavlaunch.JMinecraftVersionList
 import net.kdt.pojavlaunch.Tools
 import net.kdt.pojavlaunch.multirt.Runtime
-import net.kdt.pojavlaunch.utils.JSONUtils
+import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthConfig
 import net.kdt.pojavlaunch.value.MinecraftAccount
 import org.jackhuang.hmcl.util.versioning.VersionNumber
 import java.io.File
+import java.util.HashMap
 
 class LaunchArgs(
     private val account: MinecraftAccount,
@@ -25,7 +25,8 @@ class LaunchArgs(
     private val versionInfo: JMinecraftVersionList.Version,
     private val versionFileName: String,
     private val runtime: Runtime,
-    private val launchClassPath: String
+    private val launchClassPath: String,
+    private val nativeWorkDirectories: NativeWorkDirectories
 ) {
     fun getAllArgs(): List<String> {
         val argsList: MutableList<String> = ArrayList()
@@ -33,7 +34,7 @@ class LaunchArgs(
         argsList.addAll(getJavaArgs())
         argsList.addAll(getMinecraftJVMArgs())
         argsList.add("-cp")
-        argsList.add("${Tools.getLWJGL3ClassPath()}:$launchClassPath")
+        argsList.add("${Tools.getLWJGL3ClassPath()}${File.pathSeparator}$launchClassPath")
 
         if (runtime.javaVersion > 8) {
             argsList.add("--add-exports")
@@ -44,6 +45,12 @@ class LaunchArgs(
         argsList.add(versionInfo.mainClass)
         argsList.addAll(getMinecraftClientArgs())
 
+        JvmArgumentSanitizer.validateNoUnresolvedPlaceholders(
+            argsList,
+            account.accountType ?: "Unknown",
+            minecraftVersion.getVersionName(),
+            "Minecraft version arguments"
+        )
         return argsList
     }
 
@@ -65,12 +72,13 @@ class LaunchArgs(
         val configFilePath = if (is7) LibPath.LOG4J_XML_1_7 else LibPath.LOG4J_XML_1_12
         argsList.add("-Dlog4j.configurationFile=${configFilePath.absolutePath}")
 
-        val versionSpecificNativesDir = File(PathManager.DIR_CACHE, "natives/${minecraftVersion.getVersionName()}")
-        if (versionSpecificNativesDir.exists()) {
-            val dirPath = versionSpecificNativesDir.absolutePath
-            argsList.add("-Djava.library.path=$dirPath:${PathManager.DIR_NATIVE_LIB}")
-            argsList.add("-Djna.boot.library.path=$dirPath")
-        }
+        val nativeSearchPaths = nativeSearchPaths().joinToString(File.pathSeparator)
+        argsList.add("-Djava.library.path=$nativeSearchPaths")
+        argsList.add("-Dorg.lwjgl.librarypath=$nativeSearchPaths")
+        argsList.add("-Djna.boot.library.path=$nativeSearchPaths")
+        argsList.add("-Dorg.lwjgl.system.SharedLibraryExtractPath=${nativeWorkDirectories.lwjgl.absolutePath}")
+        argsList.add("-Djna.tmpdir=${nativeWorkDirectories.jna.absolutePath}")
+        argsList.add("-Dio.netty.native.workdir=${nativeWorkDirectories.netty.absolutePath}")
 
         return argsList
     }
@@ -82,12 +90,6 @@ class LaunchArgs(
 //        if (versionInfo.inheritsFrom == null || versionInfo.arguments == null || versionInfo.arguments.jvm == null) {
 //            return emptyArray()
 //        }
-
-        val varArgMap: MutableMap<String, String?> = android.util.ArrayMap()
-        varArgMap["classpath_separator"] = ":"
-        varArgMap["library_directory"] = getLibrariesHome()
-        varArgMap["version_name"] = versionInfo.id
-        varArgMap["natives_directory"] = PathManager.DIR_NATIVE_LIB
 
         val minecraftArgs: MutableList<String> = java.util.ArrayList()
         versionInfo.arguments?.let {
@@ -101,47 +103,84 @@ class LaunchArgs(
                 }
             }
         }
-        return JSONUtils.insertJSONValueList(minecraftArgs.toTypedArray<String>(), varArgMap)
+        val resolvedArguments = LaunchArgumentResolver.resolve(
+            minecraftArgs,
+            placeholderValues(),
+            AccountUtils.isMicrosoftAccount(account)
+        )
+        return JvmArgumentSanitizer.removeLauncherOwnedNativeProperties(
+            JvmArgumentSanitizer.removeClasspathArguments(resolvedArguments)
+        ).toTypedArray()
     }
 
     private fun getMinecraftClientArgs(): Array<String> {
-        val verArgMap: MutableMap<String, String> = ArrayMap()
-        verArgMap["auth_session"] = account.accessToken
-        verArgMap["auth_access_token"] = account.accessToken
-        verArgMap["auth_player_name"] = account.username
-        verArgMap["auth_uuid"] = account.profileId.replace("-", "")
-        verArgMap["auth_xuid"] = account.xuid
-        verArgMap["assets_root"] = ProfilePathHome.getAssetsHome()
-        verArgMap["assets_index_name"] = versionInfo.assets
-        verArgMap["game_assets"] = ProfilePathHome.getAssetsHome()
-        verArgMap["game_directory"] = gameDirPath.absolutePath
-        verArgMap["user_properties"] = "{}"
-        verArgMap["user_type"] = "msa"
-        verArgMap["version_name"] = versionInfo.inheritsFrom ?: versionInfo.id
-
-        setLauncherInfo(verArgMap)
-
         val minecraftArgs: MutableList<String> = ArrayList()
         versionInfo.arguments?.apply {
             // Support Minecraft 1.13+
             game.forEach { if (it is String) minecraftArgs.add(it) }
         }
 
-        return JSONUtils.insertJSONValueList(
+        return LaunchArgumentResolver.resolve(
             splitAndFilterEmpty(
                 versionInfo.minecraftArguments ?:
                 Tools.fromStringArray(minecraftArgs.toTypedArray())
-            ), verArgMap
-        )
+            ).toList(),
+            placeholderValues(),
+            AccountUtils.isMicrosoftAccount(account)
+        ).toTypedArray()
     }
 
-    private fun setLauncherInfo(verArgMap: MutableMap<String, String>) {
-        verArgMap["launcher_name"] = InfoDistributor.LAUNCHER_NAME
-        verArgMap["launcher_version"] = ZHTools.getVersionName()
-        verArgMap["version_type"] = minecraftVersion.getCustomInfo()
-            .takeIf { it.isNotEmpty() && it.isNotBlank() }
-            ?: versionInfo.type
+    private fun placeholderValues(): Map<String, String> = HashMap<String, String>().apply {
+        fun putValue(key: String, value: String?) {
+            value?.takeIf { it.isNotBlank() }?.let { put(key, it) }
+        }
+
+        putValue("auth_session", account.accessToken)
+        putValue("auth_access_token", account.accessToken)
+        putValue("auth_player_name", account.username)
+        putValue("auth_uuid", account.profileId?.replace("-", ""))
+        putValue("auth_xuid", account.xuid)
+        putValue("assets_root", ProfilePathHome.getAssetsHome())
+        putValue("assets_index_name", versionInfo.assets)
+        putValue("game_assets", ProfilePathHome.getAssetsHome())
+        putValue("game_directory", gameDirPath.absolutePath)
+        putValue("user_properties", "{}")
+        putValue("user_type", if (AccountUtils.isMicrosoftAccount(account)) "msa" else "legacy")
+        putValue("version_name", versionInfo.inheritsFrom ?: versionInfo.id)
+        putValue("version_type", minecraftVersion.getCustomInfo().takeIf { it.isNotBlank() } ?: versionInfo.type)
+        putValue("classpath_separator", File.pathSeparator)
+        putValue("library_directory", getLibrariesHome())
+        putValue("natives_directory", versionSpecificNativesDir().absolutePath)
+        putValue("classpath", "${Tools.getLWJGL3ClassPath()}${File.pathSeparator}$launchClassPath")
+        putValue("launcher_name", InfoDistributor.LAUNCHER_NAME)
+        putValue("launcher_version", BuildConfig.VERSION_NAME)
+
+        if (AccountUtils.isMicrosoftAccount(account)) {
+            LaunchArgumentResolver.addClientIdAliases(this, MicrosoftAuthConfig.CLIENT_ID)
+        }
     }
+
+    private fun versionSpecificNativesDir() =
+        File(PathManager.DIR_CACHE, "natives/${minecraftVersion.getVersionName()}")
+
+    private fun nativeSearchPaths(): List<String> = linkedSetOf<String>().apply {
+        versionSpecificNativesDir().takeIf { it.isDirectory && it.canRead() }
+            ?.let { add(it.absolutePath) }
+        File(PathManager.DIR_NATIVE_LIB).takeIf { it.isDirectory && it.canRead() }
+            ?.let { add(it.absolutePath) }
+    }.toList().also { paths ->
+        if (paths.isEmpty()) {
+            throw LaunchPreparationException("No readable native library search directory is available")
+        }
+        if (paths.none { isReadableNativeLibrary(File(it, "liblwjgl.so")) }) {
+            throw LaunchPreparationException(
+                "The packaged LWJGL native library liblwjgl.so is missing or unreadable"
+            )
+        }
+    }
+
+    private fun isReadableNativeLibrary(file: File) =
+        file.isFile && file.canRead() && file.length() > 0L
 
     private fun splitAndFilterEmpty(arg: String): Array<String> {
         val list: MutableList<String> = ArrayList()
@@ -189,14 +228,12 @@ class LaunchArgs(
                 argsList.add("--add-opens=java.base/java.net=ALL-UNNAMED")
             }
 
-            val cacioClassPath = StringBuilder()
-            cacioClassPath.append("-Xbootclasspath/").append(if (isJava8) "p" else "a")
-            val cacioFiles = if (isJava8) LibPath.CACIO_8 else LibPath.CACIO_17
-            cacioFiles.listFiles()?.onEach {
-                if (it.name.endsWith(".jar")) cacioClassPath.append(":").append(it.absolutePath)
-            }
-
-            argsList.add(cacioClassPath.toString())
+            argsList.add(CacioFiles.buildBootClasspath(
+                isJava8,
+                LibPath.CACIO_8,
+                LibPath.CACIO_17,
+                LibPath.CACIO_17_AGENT
+            ))
 
             return argsList
         }

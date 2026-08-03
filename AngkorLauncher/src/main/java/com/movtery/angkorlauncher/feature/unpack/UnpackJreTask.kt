@@ -3,10 +3,13 @@ package com.movtery.angkorlauncher.feature.unpack
 import android.content.Context
 import android.content.res.AssetManager
 import com.movtery.angkorlauncher.feature.log.Logging
+import com.movtery.angkorlauncher.launch.RuntimeFiles
+import com.movtery.angkorlauncher.utils.path.PathManager
 import net.kdt.pojavlaunch.Architecture
 import net.kdt.pojavlaunch.Tools
 import net.kdt.pojavlaunch.multirt.MultiRTUtils
 import java.io.FilterInputStream
+import java.io.File
 import java.io.InputStream
 
 class UnpackJreTask(val context: Context, val jre: Jre) : AbstractUnpackTask() {
@@ -30,7 +33,9 @@ class UnpackJreTask(val context: Context, val jre: Jre) : AbstractUnpackTask() {
 
         runCatching {
             val installedRuntimeVersion = MultiRTUtils.readInternalRuntimeVersion(jre.jreName)
-            return launcherRuntimeVersion != installedRuntimeVersion
+            val runtimeHome = File(PathManager.DIR_MULTIRT_HOME, jre.jreName)
+            return launcherRuntimeVersion != installedRuntimeVersion ||
+                !RuntimeFiles.hasRequiredStructure(runtimeHome, jre.javaVersion)
         }.getOrElse { e ->
             Logging.e("CheckInternalRuntime", Tools.printToString(e))
             return false

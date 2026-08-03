@@ -20,6 +20,9 @@
     <string name="generic_warning">Warning</string>
     <string name="generic_ok">OK</string>
     <string name="generic_error">Error</string>
+    <string name="lwjgl_runtime_missing">LWJGL runtime files are missing or incomplete. Please reinstall the launcher or runtime.</string>
+    <string name="launch_preparation_failed">The game cannot start because launch preparation failed. Check the detailed error for the affected directory, argument, or Java runtime.</string>
+    <string name="login_arguments_invalid">Angkor Launcher could not prepare the login arguments for this Minecraft version. Please check the selected account or reinstall the version.</string>
     <string name="generic_load">Load</string>
     <string name="generic_name">Name</string>
     <string name="generic_restart">Restart</string>

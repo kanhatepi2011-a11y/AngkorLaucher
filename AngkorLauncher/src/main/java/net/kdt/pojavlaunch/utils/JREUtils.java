@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.movtery.angkorlauncher.InfoDistributor;
 import com.movtery.angkorlauncher.R;
 import com.movtery.angkorlauncher.event.value.JvmExitEvent;
+import com.movtery.angkorlauncher.launch.JvmArgumentSanitizer;
 import com.movtery.angkorlauncher.feature.customprofilepath.ProfilePathHome;
 import com.movtery.angkorlauncher.feature.customprofilepath.ProfilePathManager;
 import com.movtery.angkorlauncher.feature.log.Logging;
@@ -398,6 +399,7 @@ public final class JREUtils {
         userArgs.add("-XX:ActiveProcessorCount=" + java.lang.Runtime.getRuntime().availableProcessors());
 
         userArgs.addAll(JVMArgs);
+        userArgs = JvmArgumentSanitizer.keepLastSystemPropertyAndClasspath(userArgs);
         activity.runOnUiThread(() -> Toast.makeText(activity, activity.getString(R.string.autoram_info_msg, AllSettings.getRamAllocation().getValue().getValue()), Toast.LENGTH_SHORT).show());
         System.out.println(JVMArgs);
         for (int i = 0; i < userArgs.size(); i++) {
@@ -456,7 +458,6 @@ public final class JREUtils {
         ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + runtimeHome,
                 "-Djava.io.tmpdir=" + PathManager.DIR_CACHE.getAbsolutePath(),
-                "-Djna.boot.library.path=" + DIR_NATIVE_LIB,
                 "-Duser.home=" + ProfilePathManager.INSTANCE.getCurrentPath(),
                 "-Duser.language=" + System.getProperty("user.language"),
                 "-Dos.name=Linux",

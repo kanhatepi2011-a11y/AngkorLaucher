@@ -21,6 +21,8 @@ import com.movtery.angkorlauncher.event.value.MicrosoftLoginEvent;
 import com.movtery.angkorlauncher.feature.log.Logging;
 import com.movtery.angkorlauncher.ui.fragment.BaseFragment;
 
+import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftAuthConfig;
+
 import org.greenrobot.eventbus.EventBus;
 
 public class MicrosoftLoginFragment extends BaseFragment {
@@ -67,10 +69,10 @@ public class MicrosoftLoginFragment extends BaseFragment {
             binding.webView.clearFormData();
             binding.webView.clearHistory();
             binding.webView.loadUrl("https://login.live.com/oauth20_authorize.srf" +
-                    "?client_id=00000000402b5328" +
+                    "?client_id=" + MicrosoftAuthConfig.CLIENT_ID +
                     "&response_type=code" +
                     "&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL" +
-                    "&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
+                    "&redirect_url=" + Uri.encode(MicrosoftAuthConfig.REDIRECT_URI));
         });
     }
 
@@ -127,7 +129,7 @@ public class MicrosoftLoginFragment extends BaseFragment {
     class WebViewTrackClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url.startsWith("ms-xal-00000000402b5328")) {
+            if (url.startsWith("ms-xal-" + MicrosoftAuthConfig.CLIENT_ID)) {
                 // Should be captured by the activity to kill the fragment and get
                 EventBus.getDefault().post(new MicrosoftLoginEvent(Uri.parse(url)));
                 Toast.makeText(view.getContext(), getString(R.string.account_login_start), Toast.LENGTH_SHORT).show();

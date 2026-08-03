@@ -64,7 +64,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_layout"
         android:layout_width="@dimen/settings_toolbar_width"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/settings_toolbar_height"
         android:layout_marginEnd="@dimen/settings_toolbar_margin_end"
         android:background="@drawable/settings_rail_glass"
         android:clipChildren="true"
@@ -75,24 +75,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.angcyo.tablayout.DslTabLayout
+        <LinearLayout
             android:id="@+id/settings_tab"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:clipChildren="true"
             android:clipToPadding="true"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tab_draw_indicator="false"
-            app:tab_orientation="VERTICAL">
+            >
 
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/video_settings"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/settings_toolbar_item_size"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/settings_rail_item"
                 android:clickable="true"
                 android:contentDescription="@string/setting_category_video"
@@ -111,6 +112,7 @@
                     android:clickable="false"
                     android:contentDescription="@string/setting_category_video"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_setting_video"
@@ -120,7 +122,8 @@
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/controls_settings"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/settings_toolbar_item_size"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="@dimen/settings_toolbar_item_gap"
                 android:background="@drawable/settings_rail_item"
                 android:clickable="true"
@@ -140,6 +143,7 @@
                     android:clickable="false"
                     android:contentDescription="@string/setting_category_control"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_menu_custom_controls"
@@ -149,7 +153,8 @@
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/game_settings"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/settings_toolbar_item_size"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="@dimen/settings_toolbar_item_gap"
                 android:background="@drawable/settings_rail_item"
                 android:clickable="true"
@@ -169,6 +174,7 @@
                     android:clickable="false"
                     android:contentDescription="@string/setting_category_game"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_setting_game"
@@ -178,7 +184,8 @@
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/launcher_settings"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/settings_toolbar_item_size"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="@dimen/settings_toolbar_item_gap"
                 android:background="@drawable/settings_rail_item"
                 android:clickable="true"
@@ -198,6 +205,7 @@
                     android:clickable="false"
                     android:contentDescription="@string/setting_category_launcher"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_setting_launcher"
@@ -207,7 +215,8 @@
             <com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/experimental_settings"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/settings_toolbar_item_size"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="@dimen/settings_toolbar_item_gap"
                 android:background="@drawable/settings_rail_item"
                 android:clickable="true"
@@ -227,13 +236,14 @@
                     android:clickable="false"
                     android:contentDescription="@string/setting_category_experimental"
                     android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_setting_experimental"
                     app:tint="@color/renderer_text_primary" />
             </com.movtery.angkorlauncher.ui.layout.AnimRelativeLayout>
 
-        </com.angcyo.tablayout.DslTabLayout>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

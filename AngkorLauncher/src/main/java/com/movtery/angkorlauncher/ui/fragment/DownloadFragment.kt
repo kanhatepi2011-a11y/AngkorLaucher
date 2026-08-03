@@ -1,7 +1,6 @@
 package com.movtery.angkorlauncher.ui.fragment
 
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +15,13 @@ import com.movtery.angkorlauncher.databinding.FragmentDownloadBinding
 import com.movtery.angkorlauncher.event.value.DownloadPageEvent
 import com.movtery.angkorlauncher.event.value.DownloadPageEvent.PageSwapEvent.Companion.IN
 import com.movtery.angkorlauncher.event.value.DownloadPageEvent.PageSwapEvent.Companion.OUT
+import com.movtery.angkorlauncher.feature.log.Logging
 import com.movtery.angkorlauncher.ui.fragment.download.resource.ModDownloadFragment
 import com.movtery.angkorlauncher.ui.fragment.download.resource.ModPackDownloadFragment
 import com.movtery.angkorlauncher.ui.fragment.download.resource.ResourcePackDownloadFragment
 import com.movtery.angkorlauncher.ui.fragment.download.resource.ShaderPackDownloadFragment
 import com.movtery.angkorlauncher.ui.fragment.download.resource.WorldDownloadFragment
+import com.movtery.angkorlauncher.ui.navigation.PageNavigation
 import com.movtery.angkorlauncher.utils.ZHTools
 import org.greenrobot.eventbus.EventBus
 
@@ -28,12 +29,16 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
     companion object {
         const val TAG = "DownloadFragment"
         private const val STATE_SELECTED_PAGE = "download_selected_page"
-        private const val NAVIGATION_DEBOUNCE_MS = 320L
+        private val CATEGORY_LABELS = intArrayOf(
+            R.string.download_classify_mod,
+            R.string.download_classify_modpack,
+            R.string.download_classify_resource_pack,
+            R.string.download_classify_world,
+            R.string.download_classify_shader_pack
+        )
     }
 
     private lateinit var binding: FragmentDownloadBinding
-    private var lastNavigationTarget = -1
-    private var lastNavigationTapUptime = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,20 +82,27 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
     }
 
     private fun navigateToCategory(targetPage: Int) {
-        val safeTarget = targetPage.coerceIn(0, categoryItems().lastIndex)
-        if (safeTarget == binding.downloadViewpager.currentItem) return
+        val items = categoryItems()
+        val currentPage = binding.downloadViewpager.currentItem
+        val safeTarget = PageNavigation.targetOrNone(currentPage, targetPage, items.size)
+        val shouldNavigate = safeTarget != PageNavigation.NO_DESTINATION
+        val logTarget = if (shouldNavigate) safeTarget else currentPage
+        Logging.i(
+            "NavigationTap",
+            "bar=download item=${getString(CATEGORY_LABELS[logTarget])} " +
+                "currentPage=$currentPage targetPage=$logTarget " +
+                "selectedBefore=${items[logTarget].isSelected} " +
+                "navigateCalled=$shouldNavigate thread=${Thread.currentThread().name}"
+        )
+        if (!shouldNavigate) return
 
-        val now = SystemClock.elapsedRealtime()
-        if (safeTarget == lastNavigationTarget &&
-            now - lastNavigationTapUptime < NAVIGATION_DEBOUNCE_MS
-        ) {
-            return
-        }
-
-        lastNavigationTarget = safeTarget
-        lastNavigationTapUptime = now
         onFragmentSelect(safeTarget)
-        binding.downloadViewpager.setCurrentItem(safeTarget, false)
+        try {
+            binding.downloadViewpager.setCurrentItem(safeTarget, false)
+        } catch (error: RuntimeException) {
+            onFragmentSelect(currentPage)
+            throw error
+        }
     }
 
     private fun categoryItems(): List<View> = listOf(
@@ -131,7 +143,6 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
         categoryItems().forEachIndexed { index, item ->
             item.isSelected = index == safePosition
         }
-        binding.classifyTab.onPageSelected(safePosition)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -147,7 +158,7 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
 
     override fun slideOut(animPlayer: AnimPlayer) {
         animPlayer.apply(AnimPlayer.Entry(binding.classifyLayout, Animations.FadeOutLeft))
-        EventBus.getDefault().post(DownloadPageEvent.PageSwapEvent(binding.classifyTab.currentItemIndex, OUT))
+        EventBus.getDefault().post(DownloadPageEvent.PageSwapEvent(binding.downloadViewpager.currentItem, OUT))
     }
 
     override fun onDestroyView() {

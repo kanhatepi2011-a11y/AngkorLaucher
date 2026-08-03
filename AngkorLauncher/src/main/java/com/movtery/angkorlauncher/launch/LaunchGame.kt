@@ -26,6 +26,7 @@ import com.movtery.angkorlauncher.utils.stringutils.StringUtils
 import net.kdt.pojavlaunch.Architecture
 import net.kdt.pojavlaunch.JMinecraftVersionList
 import net.kdt.pojavlaunch.Logger
+import net.kdt.pojavlaunch.LWJGLRuntimeException
 import net.kdt.pojavlaunch.Tools
 import net.kdt.pojavlaunch.authenticator.microsoft.PresentedException
 import net.kdt.pojavlaunch.lifecycle.ContextAwareDoneListener
@@ -231,19 +232,59 @@ class LaunchGame {
             Tools.disableSplash(gameDirPath)
             val launchClassPath = Tools.generateLaunchClassPath(versionInfo, minecraftVersion)
 
-            val launchArgs = LaunchArgs(
-                account,
-                gameDirPath,
-                minecraftVersion,
-                versionInfo,
-                minecraftVersion.getVersionName(),
-                runtime,
-                launchClassPath
-            ).getAllArgs()
+            val launchArgs = try {
+                val runtimeHome = try {
+                    MultiRTUtils.getRuntimeHome(javaRuntime)
+                } catch (exception: RuntimeException) {
+                    throw LaunchPreparationException(
+                        "The selected Java runtime is missing or unreadable. Reinstall $javaRuntime.",
+                        exception
+                    )
+                }
+                RuntimeFiles.validate(
+                    runtimeHome,
+                    runtime,
+                    versionInfo.javaVersion?.majorVersion ?: 8,
+                    Tools.DEVICE_ARCHITECTURE
+                )
+                val nativeWorkDirectories = NativeWorkDirectories.prepare(activity.cacheDir)
+                LaunchArgs(
+                    account,
+                    gameDirPath,
+                    minecraftVersion,
+                    versionInfo,
+                    minecraftVersion.getVersionName(),
+                    runtime,
+                    launchClassPath,
+                    nativeWorkDirectories
+                ).getAllArgs()
+            } catch (exception: LWJGLRuntimeException) {
+                Logging.e("LaunchGame", "Launch preparation stopped: ${exception.message}", exception)
+                Tools.showError(activity, R.string.lwjgl_runtime_missing, exception)
+                return
+            } catch (exception: LoginArgumentException) {
+                Logging.e("LaunchGame", "Login argument preparation stopped: ${exception.message}", exception)
+                Tools.showError(activity, R.string.login_arguments_invalid, exception)
+                return
+            } catch (exception: LaunchPreparationException) {
+                Logging.e("LaunchGame", "Launch preparation stopped: ${exception.message}", exception)
+                Tools.showError(activity, R.string.launch_preparation_failed, exception)
+                return
+            }
 
             FFmpegPlugin.discover(activity)
 
-            JREUtils.launchWithUtils(activity, runtime, minecraftVersion, launchArgs, customArgs)
+            try {
+                JREUtils.launchWithUtils(activity, runtime, minecraftVersion, launchArgs, customArgs)
+            } catch (exception: LoginArgumentException) {
+                Logging.e("LaunchGame", "Login argument preparation stopped: ${exception.message}", exception)
+                Tools.showError(activity, R.string.login_arguments_invalid, exception)
+                return
+            } catch (exception: LaunchPreparationException) {
+                Logging.e("LaunchGame", "Final argument preparation stopped: ${exception.message}", exception)
+                Tools.showError(activity, R.string.launch_preparation_failed, exception)
+                return
+            }
         }
 
         private fun checkMemory(activity: AppCompatActivity) {
